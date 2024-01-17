@@ -60,5 +60,5 @@ Created a new private repository with name suvarnrk-waph as suggested by the ins
 
 I used the `pandoc` tool to generate the PDF report for submission from the `README.md` file, and ensured that the report and contents are rendered properly.
 
-
+![Repository changes pushed](images/image3.png)
 
