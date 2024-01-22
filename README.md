@@ -8,58 +8,127 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-**Short-bio**: I am international student from India, pursuing my masters in School of IT at University of Cincinnati. My Key skills are Microsoft .Net, MYSQL server, Iam also proficient with languages c, c#, Html, CSS.
+![Ruthvik Suvarnakanti](images/headshot.jpg)
 
-![Ruthvik Suvarnakanti](/home/administrator/waph-suvarnrk/labs/Lab0/Images/Ruthvik.JPEG)
+## Lab 1 - Foundations of the WEB
 
-## Repository Information
+**Overview**: This lab deals with web technologies , HTTP protocol and basic web application programming. Focusing on Wireshark and TELNET for examining the HTTP requests, responses and comparing them with broswer sent requests.
+Moving on to the web application programming I got familiarized with develepment of CGI programs in C and incorporating HTML templates. Additionally this lab covers PHP web application development. The final task explores HTTP GET and POST request utilizing wireshark and curl.
+The Labs1 report was written in Markdown format and Pandoc tool was used to genearate the PDF report for submission.
 
-Respository's URL: [https://github.com/suvarnrk/suvarnrk-WAPH.git](https://github.com/suvarnrk/suvarnrk-WAPH.git)
+[https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab1/README.md](https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab1/README.md).
 
-This is a private repository of Ruthvik Suvarnakanti to store all code from the course.
+## Part 1 : The WEB and the HTTP Protocol
 
-# Lab 0 - Development Environment Setup 
+### Task 1. Familiar with the Wireshark tool and HTTP protocol
 
-## Overview 
+Wireshark is a protocol Analyzer tool which is used for network analysis and troubleshooting. After installing the wirshark in Ubuntu VM , I have clicked on the capture options (4th icon)  selected any on the input interface and enabled the promiscous mode on filters checkbox. Now started to capture the packets and filtered HTTP protocol  among all the other protocols.Then , respective HTTP requests and responses are selected to analyze and observe the HTTP stream.
+The HTTP request gives the information about the type of request, target URL , HTTP version, content-type , authorization and the data that is sent to the web servers.
+The HTTP response gives the information about staus code, status text , content-type and the data that is sent back to the web browser etc.
 
-In the Web Application Programming and Hacking course, I used the UC Sandbox to put up a the latest version of Ubuntu virtual machine for Lab 0. I set up the necessary programs, including the Google chrome , the text editor Sublime Text, GitHub, the Apache server2, and Pandoc. I made a private Git repository on GitHub, shared it with the instructor, and cloned it locally to make cooperation easier. I made sure it was clear by actively amending README.md, which enhanced the project documentation. Lastly, I finished the Lab 0 activities and used Pandoc to create a well-formatted PDF report that demonstrated my command of web development technologies and my ability to communicate effectively.
+![Wireshark HTTP Request](images/HTTP_REQUEST.png)
 
-[https://github.com/suvarnrk/waph-suvarnrk/edit/main/labs/lab0] (https://github.com/suvarnrk/waph-suvarnrk/edit/main/labs/lab0)
+![Wireshark HTTP Response](images/HTTP_RESPONSE.png)
+
+![Wireshark HTTP Stream](images/HTTP_STREAM.png)
+
+## Task 2. Understanding HTTP using telnet and Wireshark
+
+Wireshark was started to capture the network packets before making the HTTP request to exmaple.com/index.html via TELNET through the terminal. For using the TELNET first the connection was established to the exmaple.com webserver through the syntax telnet example.com portNumber. After the connection is established the type of request , path file , http version and host name were given for making the HTTP Request. And the response was received after clicking on the enter twice.
+
+![Telnet request](images/TELNET_REQUEST.png)
+
+Comparing the HTTP requests through browser and TELNET in wireshark, it is noted that server fields were missing in the telnet made request .
+The telnet HTTP request is manually constructed where as in the browser sent request the browser automatically populates request headers such as user-agent, accept, accept-language, authorization , encoding and content etc.
+
+![Telnet request in wireshark](images/TELNET_WIRESHARK_REQ.png)
+
+both the HTTP responses in wireshark through browser and TELNET were same.
+
+![Telent response in wireshark](images/TELNET_WIRESHARK_RESP.png)
 
 
+## Part II - Basic Web Application Programming
 
-## Part I - Ubuntu Virtual Machine & Software Installation
+### Task 1: CGI Web applications in C
 
-I followed the instructor's guidance to access the CECH sandbox at the University of Cincinnati for using the Web Application Programming and Hacking virtual machine. After the VM deployment, I opened it through the remote console, establishing a connection to the Ubuntu VM.
+A. I have developed a basic CGI program in C which just prints Hello world! , I have compiled this using gcc and deployed the generated cgi file by copying it to usr/lib/cgi-bin before accessing it on localhost/cgi-bin/helloWorld.cgi in the browser.
 
-### Apache Web Server Testing
+![CGI program in C](images/CGI_IN_C.png)
 
-Testing the IP address of Apache server on google chrome
+B. Now , I have developed another CGI programming in C, this time incorporting a basic HTML template in the C code . This template has the course name as title, student name as Heading and other details as paragraph. This file was also compiled using gcc and copied to usr/lib/cgi-bin before accessing on the browser.
 
-![Testing Apache server](/home/administrator/waph-suvarnrk/labs/Lab0/Images/Apache.JPEG)
+![CGI in C and HTML](images/CGI_IN_C_HTML.png)
 
-## Part II - git Repositories and Exercises
+Included file `helloworld.c`:
+```C
+    #include<stdio.h>
+    int main() {
+    const char *htmlContent = "<!DOCTYPE html> <html> <head> <title>Web Application Programming and Hacking</title>"
+                              "</head> <body> <h1>Student: Tulasiram Nakkanaboina</h1>"
+                              "<p>This exercise is done as part of Lab1 assessment i.e CGI Web Applications with C.</p></body></html>";
 
-the course Web Application programming and hacking course repository on Git
+    printf("Content-Type: text/html\n\n");
+    printf("%s", htmlContent);
+    return 0;
+}
+```
 
-![Git Repository](/home/administrator/waph-suvarnrk/labs/Lab0/Images/Repo.JPEG)
-### The course repository
+### Task 2: A simple PHP Web Application with user input.
 
-Include a **screenshot** to show that you have cloned the course repository into the home directory in your VM.
+A. As part of this task , a PHP web application has been developed with basic syntax which includes my name and PHP version , deployed it to the root apache2 var/www/html directory . It was then accessed on the browser with the url IP address/helloworld.php
 
-### Private Repository
+![helloWorld.php](images/helloWorldPhp.png)
 
-Created a new private repository with name suvarnrk-waph as suggested by the instructor and added professor as a collaborator using his username phung-waph and requested him.
+Included file `helloworld.php`:
+```PHP
+<?php
+    echo "Hello World! This is my first PHP program, Tulasiram Nakkanaboina , WAPH";
+?>
+```
 
-[https://github.com/suvarnrk/waph-suvarnrk](https://github.com/suvarnrk/waph-suvarnrk)
- I created an SSH key on my local computer and copied the id_rsa.pub public key to GitHub via Settings -> SSH and GPG keys -> New SSH key in order to enable SSH authentication. Using the SSH link, cloned the repository now.GitHub.
+B. A simple echo web application in PHP has been developed which prints the path variable passed through the http request.
+using $_REQUEST('data') in PHP for capturing the path variables in GET and POST requests possess various secrurity vulnerabilities such as data tampering, SQL injections and Remote Code Execution. By implementing input validation , prepared statments for SQL inputs and sanitizing the usser inputs can mitigate these risks.
 
- I inserted a headshot image and modified the README.md file using the instructor's template after cloning the repository to my local computer. The picture was posted straight to github.com's "images" subdirectory. I then committed and staged these changes before submitting them to the remote repository. I made more edits to the README.md file on GitHub after the push. I used the terminal to get the most recent updates from the remote repository and apply them locally. My local copy precisely reflected the most recent GitHub updates thanks to this procedure.
+![echo.php](images/echoPhp.png)
 
-Include a **screenshot** to illustrate that you committed the changes from your VM to your remote repository.
+Included file `echo.php`:
+```PHP
+<?php
+    $inputData = $_REQUEST["data"];
+    echo "The input from the request is <strong>" . $inputData . "</strong>.<br>";
+?>
+```
 
-## Submission
+### Task 3: Understanding HTTP GET and POST requests.
 
-Use the `pandoc` tool to generate the PDF report for submission from the `README.md` file, and ensure the report and contents are rendered properly.
+A.By default the call that was made through the browser was a HTTP GET call and the path variable was passed using ? in the URL IPaddress/echo.php?data="value". The input varaible was then disaplyed as part of the response. This request, response and HTTP stream were analyzed through wireshark. 
 
-The PDF file should be named `your-username-waph-lab0.pdf`, e.g., `phungph-waph-lab0.pdf` 
+![HTTP GET request in WireShark](images/WiresharkReq.png)
+
+![HTTP response in WireShark](images/WiresharkResp.png)
+
+
+B.Client URL of CUrl is a command line tool for processing data using various n/w protocols. I have used CURL in terminal to make a post request to echo.php.
+
+curl -X POST localhost/echo.php -d "data=Tulasiram N"
+
+![HTTP POST request using CURL](images/curlPost.png)
+
+![HTTP Stream in Wireshark](images/postWiresharkStream.png)
+
+
+C.The similarities and differences between HTTP GET/ POST requests and respones
+Similarities:
+Both are HTTP methods used to communicate between client and server.
+Both can be captured and analyzed using tools like Wireshark.
+Both have request headers (though the headers might differ).
+Both receive responses with status codes, headers
+Differences:
+In GET request data is sent in the URL whereas in the POST request data is sent in the HTTP body.
+POST is more secure as data is not exposed to normal users.
+GET is used for retreiving the information, whereas POST is used to updated the information .
+
+as the echo.php web application is a mirror application , i.e just printing the recieved input , the responses in both the HTTP GET and HTTP POST are identical.
+
+Post this Labs/Lab1 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
