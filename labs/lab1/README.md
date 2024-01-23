@@ -22,9 +22,8 @@ The Labs1 report was written in Markdown format and Pandoc tool was used to gene
 
 ### Task 1. Familiar with the Wireshark tool and HTTP protocol
 
-Wireshark is a protocol Analyzer tool which is used for network analysis and troubleshooting. After installing the wirshark in Ubuntu VM , I have clicked on the capture options (4th icon)  selected any on the input interface and enabled the promiscous mode on filters checkbox. Now started to capture the packets and filtered HTTP protocol  among all the other protocols.Then , respective HTTP requests and responses are selected to analyze and observe the HTTP stream.
-The HTTP request gives the information about the type of request, target URL , HTTP version, content-type , authorization and the data that is sent to the web servers.
-The HTTP response gives the information about staus code, status text , content-type and the data that is sent back to the web browser etc.
+A popular tool for analyzing network packets and protocols, Wireshark records and shows intricate packet data to aid with network problems. Installing it on Ubuntu virtual machines, checking the version, and using it to examine and solve network problems are all possible. Firstly, Install Wireshark in ubuntu using commands from terminal. Open the Wireshark and filter the captures with “any” using which results in all traffics happening. Filter the displaying packets using “http”. Give a request in the browser , here I have given “http://example.com/index.html” as a request and observed the packets in the Wireshark by filtering http in the displayed packets. There will be a HTTP GET request and HTTP response for the request given in browser, we need to capture those packets as part of one this module.
+
 
 ![Wireshark HTTP Request](images/HTTPReq.png)
 
@@ -38,12 +37,11 @@ Wireshark was started to capture the network packets before making the HTTP requ
 
 ![Telnet request](images/TelnetReq.png)
 
-Comparing the HTTP requests through browser and TELNET in wireshark, it is noted that server fields were missing in the telnet made request .
-The telnet HTTP request is manually constructed where as in the browser sent request the browser automatically populates request headers such as user-agent, accept, accept-language, authorization , encoding and content etc.
+Telnet, a network application utilizing the telnet protocol, facilitates TCP connections to servers for data exchange. In this task we will be requesting the example.com/index.html through telnet instead of using browser request. Connection should be established firstly between the telnet and example.com webserver using command “telnet example.com 80” here 80 is the port number. After a successful connection is established, GET command and Host commands are entered manually to get the required response. 
 
 ![Telnet request in wireshark](images/Telnet_wireshark_req.png)
 
-both the HTTP responses in wireshark through browser and TELNET were same.
+The HTTP replies in Wireshark were identical whether viewed using a browser and TELNET.
 
 ![Telent response in wireshark](images/Telnet_wireshark_resp.png)
 
@@ -52,11 +50,12 @@ both the HTTP responses in wireshark through browser and TELNET were same.
 
 ### Task 1: CGI Web applications in C
 
-A. I have developed a basic CGI program in C which just prints Hello world! , I have compiled this using gcc and deployed the generated cgi file by copying it to usr/lib/cgi-bin before accessing it on localhost/cgi-bin/helloWorld.cgi in the browser.
+A. CGI is a commonly used protocol allowing web servers to communicate with external applications by executing them as command-line programs. To write a C "Hello World!" CGI program, write a script that outputs "Hello World CGI! From Ruthvik Suvarnakanti, WAPH." The code may be run as a standard binary application and built using gcc installable with “$ sudo apt install gcc”. After creating a helloworld.c program copy it to the helloworld.cgi in cgi-bin folder. After entering the commands, enter ” http://localhost/cgi-bin/helloworld.cgi “  you will get the response in the browser for which the code you entered.
 
 ![CGI program in C](images/CGI_IN_C.png)
 
-B. Now , I have developed another CGI programming in C, this time incorporting a basic HTML template in the C code . This template has the course name as title, student name as Heading and other details as paragraph. This file was also compiled using gcc and copied to usr/lib/cgi-bin before accessing on the browser.
+B. I enhanced my CGI programming in C by integrating a basic HTML template featuring the course name as the title and student details. After compiling the code with gcc, I placed the resulting file in usr/lib/cgi-bin for browser access.
+
 
 ![CGI in C and HTML](images/CGI_IN_C_HTML.png)
 
@@ -65,7 +64,7 @@ Included file `helloworld.c`:
     #include<stdio.h>
     int main() {
     const char *htmlContent = "<!DOCTYPE html> <html> <head> <title>Web Application Programming and Hacking</title>"
-                              "</head> <body> <h1>Student: Tulasiram Nakkanaboina</h1>"
+                              "</head> <body> <h1>Student: Ruthvik Suvarnakanti</h1>"
                               "<p>This exercise is done as part of Lab1 assessment i.e CGI Web Applications with C.</p></body></html>";
 
     printf("Content-Type: text/html\n\n");
@@ -76,40 +75,40 @@ Included file `helloworld.c`:
 
 ### Task 2: A simple PHP Web Application with user input.
 
-A. As part of this task , a PHP web application has been developed with basic syntax which includes my name and PHP version , deployed it to the root apache2 var/www/html directory . It was then accessed on the browser with the url IP address/helloworld.php
+A. In the labs/lab1 folder of your private repository, create a new file named helloworld.php. The file should contain content that utilizes the echo language construct in PHP for printing strings from texts or expressions. The echo construct can be employed with or without parentheses, wrapping texts within either double or single quotes. Additionally, phpinfo() is included to display PHP information on the server for testing purposes only. Deploy the code to the root directory of the webserver using the following commands$ cd <path-to-the-folder> $ sudo cp helloworld.php /var/www/html
+Browsers should be able to view the deployed page at http://<192.167.9.212>/helloworld.php.
 
 ![helloWorld.php](images/helloWorldphp.png)
 
 Included file `helloworld.php`:
 ```PHP
 <?php
-    echo "Hello World! This is my first PHP program, Tulasiram Nakkanaboina , WAPH";
+    echo "Hello World! This is my first PHP program, Ruthvik Suvarnakanti , WAPH";
 ?>
 ```
 
-B. A simple echo web application in PHP has been developed which prints the path variable passed through the http request.
-using $_REQUEST('data') in PHP for capturing the path variables in GET and POST requests possess various secrurity vulnerabilities such as data tampering, SQL injections and Remote Code Execution. By implementing input validation , prepared statments for SQL inputs and sanitizing the usser inputs can mitigate these risks.
+B. Using the echo function, I've developed a simple PHP web application that outputs the path variable obtained from HTTP queries. It's crucial to remember that using PHP's $_REQUEST('data') to record path variables in GET and POST requests exposes you to security flaws including remote code execution, SQL injections, and data manipulation. It is essential to apply input validation, use prepared statements for SQL inputs, and sanitize user inputs in order to reduce these risks.
 
 ![echo.php](images/echophp.png)
 
 Included file `echo.php`:
 ```PHP
 <?php
-    $inputData = $_REQUEST["data"];
-    echo "The input from the request is <strong>" . $inputData . "</strong>.<br>";
+    $inputData = $_REQUEST["input"];
+    echo $inputData ;
 ?>
 ```
 
 ### Task 3: Understanding HTTP GET and POST requests.
 
-A.By default the call that was made through the browser was a HTTP GET call and the path variable was passed using ? in the URL IPaddress/echo.php?data="value". The input varaible was then disaplyed as part of the response. This request, response and HTTP stream were analyzed through wireshark. 
+A. The call made by the browser was a standard HTTP GET request, and it used the "?" character in the URL syntax i.e., IPaddress/echo.php?input="value" to send the path variable. The result included the input variable after that. Wireshark was used to examine the request itself, the response, and HTTP stream in its entirety. 
 
 ![HTTP GET request in WireShark](images/wiresharkReq.png)
 
 ![HTTP response in WireShark](images/wiresharkResp.png)
 
 
-B.Client URL of CUrl is a command line tool for processing data using various n/w protocols. I have used CURL in terminal to make a post request to echo.php.
+B. A command-line program called Client URL (cURL) is intended for data processing over various network protocols. In this case, I sent a POST call to the echo.php endpoint using cURL in the terminal. This required utilizing the cURL command-line tool to deliver data to the server using the HTTP POST protocol.
 
 curl -X POST localhost/echo.php -d "input= Ruthvik"
 
@@ -118,17 +117,4 @@ curl -X POST localhost/echo.php -d "input= Ruthvik"
 ![HTTP Stream in Wireshark](images/postwiresharkstream.png)
 
 
-C.The similarities and differences between HTTP GET/ POST requests and respones
-Similarities:
-Both are HTTP methods used to communicate between client and server.
-Both can be captured and analyzed using tools like Wireshark.
-Both have request headers (though the headers might differ).
-Both receive responses with status codes, headers
-Differences:
-In GET request data is sent in the URL whereas in the POST request data is sent in the HTTP body.
-POST is more secure as data is not exposed to normal users.
-GET is used for retreiving the information, whereas POST is used to updated the information .
-
-as the echo.php web application is a mirror application , i.e just printing the recieved input , the responses in both the HTTP GET and HTTP POST are identical.
-
-Post this Labs/Lab1 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
+C.An analysis tool such as Wireshark may be used to compare the similarities between HTTP GET and POST requests, which are essential for client-server communication and contain request headers and response codes. Interestingly, they communicate data differently: POST uses the HTTP body, whereas GET uses the URL. GET is usually used for retrieving, whereas POST is used for updating, and POST is seen to be more secure. The GET and POST replies in the echo.php web application are the same. The project report also had a Labs/Lab1 folder created for it, and the README.md file was used to construct the report using the Pandoc tool.
