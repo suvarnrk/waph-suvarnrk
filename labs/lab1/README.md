@@ -8,7 +8,7 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.jpg)
+![Ruthvik Suvarnakanti](images/headshot.JPEG)
 
 ## Lab 1 - Foundations of the WEB
 
@@ -16,8 +16,7 @@
 Moving on to the web application programming I got familiarized with develepment of CGI programs in C and incorporating HTML templates. Additionally this lab covers PHP web application development. The final task explores HTTP GET and POST request utilizing wireshark and curl.
 The Labs1 report was written in Markdown format and Pandoc tool was used to genearate the PDF report for submission.
 
-[https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab1/README.md](https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab1/README.md).
-
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md)
 ## Part 1 : The WEB and the HTTP Protocol
 
 ### Task 1. Familiar with the Wireshark tool and HTTP protocol
@@ -26,26 +25,26 @@ Wireshark is a protocol Analyzer tool which is used for network analysis and tro
 The HTTP request gives the information about the type of request, target URL , HTTP version, content-type , authorization and the data that is sent to the web servers.
 The HTTP response gives the information about staus code, status text , content-type and the data that is sent back to the web browser etc.
 
-![Wireshark HTTP Request](images/HTTP_REQUEST.png)
+![Wireshark HTTP Request](images/HTTPReq.png)
 
-![Wireshark HTTP Response](images/HTTP_RESPONSE.png)
+![Wireshark HTTP Response](images/HTTPResp.png)
 
-![Wireshark HTTP Stream](images/HTTP_STREAM.png)
+![Wireshark HTTP Stream](images/HTTPStream.png)
 
 ## Task 2. Understanding HTTP using telnet and Wireshark
 
 Wireshark was started to capture the network packets before making the HTTP request to exmaple.com/index.html via TELNET through the terminal. For using the TELNET first the connection was established to the exmaple.com webserver through the syntax telnet example.com portNumber. After the connection is established the type of request , path file , http version and host name were given for making the HTTP Request. And the response was received after clicking on the enter twice.
 
-![Telnet request](images/TELNET_REQUEST.png)
+![Telnet request](images/TelnetReq.png)
 
 Comparing the HTTP requests through browser and TELNET in wireshark, it is noted that server fields were missing in the telnet made request .
 The telnet HTTP request is manually constructed where as in the browser sent request the browser automatically populates request headers such as user-agent, accept, accept-language, authorization , encoding and content etc.
 
-![Telnet request in wireshark](images/TELNET_WIRESHARK_REQ.png)
+![Telnet request in wireshark](images/TTelnet_wireshark_req.png)
 
 both the HTTP responses in wireshark through browser and TELNET were same.
 
-![Telent response in wireshark](images/TELNET_WIRESHARK_RESP.png)
+![Telent response in wireshark](images/Telnet_wireshark_resp.png)
 
 
 ## Part II - Basic Web Application Programming
@@ -90,7 +89,7 @@ Included file `helloworld.php`:
 B. A simple echo web application in PHP has been developed which prints the path variable passed through the http request.
 using $_REQUEST('data') in PHP for capturing the path variables in GET and POST requests possess various secrurity vulnerabilities such as data tampering, SQL injections and Remote Code Execution. By implementing input validation , prepared statments for SQL inputs and sanitizing the usser inputs can mitigate these risks.
 
-![echo.php](images/echoPhp.png)
+![echo.php](images/echophp.png)
 
 Included file `echo.php`:
 ```PHP
@@ -111,11 +110,11 @@ A.By default the call that was made through the browser was a HTTP GET call and 
 
 B.Client URL of CUrl is a command line tool for processing data using various n/w protocols. I have used CURL in terminal to make a post request to echo.php.
 
-curl -X POST localhost/echo.php -d "data=Tulasiram N"
+curl -X POST localhost/echo.php -d "input= Ruthvik"
 
-![HTTP POST request using CURL](images/curlPost.png)
+![HTTP POST request using CURL](images/curlpost.png)
 
-![HTTP Stream in Wireshark](images/postWiresharkStream.png)
+![HTTP Stream in Wireshark](images/postwiresharkstream.png)
 
 
 C.The similarities and differences between HTTP GET/ POST requests and respones
