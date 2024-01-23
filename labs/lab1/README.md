@@ -8,7 +8,7 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.JPEG)
+![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
 
 ## Lab 1 - Foundations of the WEB
 
@@ -17,6 +17,7 @@ Moving on to the web application programming I got familiarized with develepment
 The Labs1 report was written in Markdown format and Pandoc tool was used to genearate the PDF report for submission.
 
 [https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md)
+
 ## Part 1 : The WEB and the HTTP Protocol
 
 ### Task 1. Familiar with the Wireshark tool and HTTP protocol
@@ -31,7 +32,7 @@ The HTTP response gives the information about staus code, status text , content-
 
 ![Wireshark HTTP Stream](images/HTTPStream.png)
 
-## Task 2. Understanding HTTP using telnet and Wireshark
+### Task 2. Understanding HTTP using telnet and Wireshark
 
 Wireshark was started to capture the network packets before making the HTTP request to exmaple.com/index.html via TELNET through the terminal. For using the TELNET first the connection was established to the exmaple.com webserver through the syntax telnet example.com portNumber. After the connection is established the type of request , path file , http version and host name were given for making the HTTP Request. And the response was received after clicking on the enter twice.
 
@@ -40,14 +41,14 @@ Wireshark was started to capture the network packets before making the HTTP requ
 Comparing the HTTP requests through browser and TELNET in wireshark, it is noted that server fields were missing in the telnet made request .
 The telnet HTTP request is manually constructed where as in the browser sent request the browser automatically populates request headers such as user-agent, accept, accept-language, authorization , encoding and content etc.
 
-![Telnet request in wireshark](images/TTelnet_wireshark_req.png)
+![Telnet request in wireshark](images/Telnet_wireshark_req.png)
 
 both the HTTP responses in wireshark through browser and TELNET were same.
 
 ![Telent response in wireshark](images/Telnet_wireshark_resp.png)
 
 
-## Part II - Basic Web Application Programming
+## Part 2 - Basic Web Application Programming
 
 ### Task 1: CGI Web applications in C
 
@@ -77,7 +78,7 @@ Included file `helloworld.c`:
 
 A. As part of this task , a PHP web application has been developed with basic syntax which includes my name and PHP version , deployed it to the root apache2 var/www/html directory . It was then accessed on the browser with the url IP address/helloworld.php
 
-![helloWorld.php](images/helloWorldPhp.png)
+![helloWorld.php](images/helloWorldphp.png)
 
 Included file `helloworld.php`:
 ```PHP
@@ -103,9 +104,9 @@ Included file `echo.php`:
 
 A.By default the call that was made through the browser was a HTTP GET call and the path variable was passed using ? in the URL IPaddress/echo.php?data="value". The input varaible was then disaplyed as part of the response. This request, response and HTTP stream were analyzed through wireshark. 
 
-![HTTP GET request in WireShark](images/WiresharkReq.png)
+![HTTP GET request in WireShark](images/wiresharkReq.png)
 
-![HTTP response in WireShark](images/WiresharkResp.png)
+![HTTP response in WireShark](images/wiresharkResp.png)
 
 
 B.Client URL of CUrl is a command line tool for processing data using various n/w protocols. I have used CURL in terminal to make a post request to echo.php.
