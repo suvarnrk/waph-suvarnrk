@@ -164,7 +164,15 @@ function drawHand(ctx, pos, length, width) {
 		onkeypress="console.log('You have pressed a key ')" id="data">
 		<input type="button" class="button round" value="Ajax Echo" onclick="getEcho()">
 		<div id="response"></div>
+			<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
+				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+				<input class="button round" type="submit" value="Guess Age" onclick="guessAge($('#data').val())">
+				<div id="response"></div>
 	</div>
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+		crossorigin="anonymous"></script>
+	
 
 	<script type="text/javascript">
 		function getEcho(){
