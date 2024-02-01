@@ -17,7 +17,8 @@
 JQuery library in JS, and web API integration. Part 1 of this lab is to design  HTML web page with basic tags and forms. Then Javascript is integrated in 4 ways that is with inline JS, JS with script tag , JS with external file and JS code from a remote repository.
 This HTML page was then integrated with CSS . Inline CSS, internal CSS and External CSS have been used to make the webpage look elegant. Then Jquery is used to make AJAX get and post calls to echo.php. Lastly 2 web services one is for generating a random joke and the other one is to guess age are integrated into this HTML code using Jquery Ajax and fetch method respectively.
 Pandoc is used to generate the PDF file from the README.md
-[https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab2/README.md](https://github.com/nakkantm-uc/waph-nakkantm/blob/main/labs/lab2/README.md)
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md)
+
 ## Part 1 : Basic HTML with forms, and JavaScript
 
 ### Task 1. HTML
@@ -25,13 +26,13 @@ Pandoc is used to generate the PDF file from the README.md
 A simple HTML webpage was developed as part of this task which includes basic tags such as `<h1>`,`<h2>`,`<h3>`,`<a>`,`<img>` , `<form>` etc.
 The file created was named waph-nakkantm.html
 
-Included file `waph-nakkantm.html`:
+Included file `waph-suvarnrk.html`:
 ```HTML
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>WAPH- TULASIRAM NAKKANABOINA</title>
+<title>WAPH- Ruthvik Suvarnakanti</title>
 </head>
 <body>
 <div >
@@ -42,8 +43,8 @@ Included file `waph-nakkantm.html`:
 	</div>
 	<div >
 		<div id="menubar">
-		<h3>Student : Tulasiram Nakkanaboina</h3>
-		<img src="images/headshot.jpg" alt="Tulasiram headshot" width="50">
+		<h3>Student : Ruthvik Suvarnakanti</h3>
+		<img src="images/headshot.jpg" alt="Ruthvik Headshot image" width="50">
 		</div>
 		<div id="main">
 			<p>A Simple HTML Page</p>
@@ -105,7 +106,7 @@ This task has given a basic overview of JS syntax and different ways of integrat
 -JS code in JS file and and code in HTML page to show or hide email when clicked.
 ```JavaScript
 	var visible = false;
-	function showOrHideEmail(){
+	function showhideEmail(){
  	 if (visible){
    	 	document.getElementById('email').innerHTML=" Show my Email";
     		visible=false;
