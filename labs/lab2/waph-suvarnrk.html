@@ -166,7 +166,7 @@ function drawHand(ctx, pos, length, width) {
 		<div id="response"></div>
 			<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
 				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-				<input class="button round" type="submit" value="Age" onclick="guessAge($('#data').val())">
+				
 				<div id="response"></div>
 	</div>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js" 
@@ -219,12 +219,8 @@ function drawHand(ctx, pos, length, width) {
 			$.get("https://v2.jokeapi.dev/joke/Programming?type=single",function(result){
 				$("#response").html("Programming joke of the day: " +result.joke);
 				});
-			async function guessAge(value){
-				const response= await fetch("https://api.agify.io/?name="+value);
-				//const response= await fetch("https://api.agify.io/?name="+value);
-				const result= await response.json();
-				$("#response").html("Hello "+value+" ,your age should be "+result.age);
-			}
+			
+		
 	</script>
 
 
