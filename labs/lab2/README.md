@@ -9,13 +9,16 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Headshot](images/headshot.jpg)
+![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
 
 ## Lab 2 - Front End Web Development
 
-**Overview**: In this hands-on lab about front-end development, we kick things off by creating an HTML webpage with forms. We dive into JavaScript, exploring different integration methods, from inline code to external files and remote repositories. To make the webpage visually appealing, we apply CSS through inline, internal, and external styles. jQuery steps in for AJAX calls to echo.php which is done in lab 1, and we spice things up by integrating web services for random jokes and age guessing using jQuery Ajax and the Fetch API. To wrap it up, we convert our documentation into a PDF using Pandoc, capturing the essence of this diverse learning experience.
+**Overview**: This lab deals with Front End Development. This lab gave overview about basic HTML, Javascript , Ajax, CSS, 
+JQuery library in JS, and web API integration. Part 1 of this lab is to design  HTML web page with basic tags and forms. Then Javascript is integrated in 4 ways that is with inline JS, JS with script tag , JS with external file and JS code from a remote repository.
+This HTML page was then integrated with CSS . Inline CSS, internal CSS and External CSS have been used to make the webpage look elegant. Then Jquery is used to make AJAX get and post calls to echo.php. Lastly 2 web services one is for generating a random joke and the other one is to guess age are integrated into this HTML code using Jquery Ajax and fetch method respectively.
+Pandoc is used to generate the PDF file from the README.md
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md)
 
-[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab2/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab2/README.md)
 ## Part 1 : Basic HTML with forms, and JavaScript
 
 ### Task 1. HTML
@@ -29,7 +32,7 @@ Included file `waph-suvarnrk.html`:
 <html>
 <head>
 <meta charset="utf-8">
-<title>WAPH- Ruthvik Suvarnakanti- IT student</title>
+<title>WAPH- Ruthvik Suvarnakanti</title>
 </head>
 <body>
 <div >
@@ -40,20 +43,14 @@ Included file `waph-suvarnrk.html`:
 	</div>
 	<div >
 		<div id="menubar">
-		<h3>Student: Ruthvik Suvarnakanti</h3>
-		<img src="images/headshot.JPEG" alt="My Headshot" width="50">
+		<h3>Student : Ruthvik Suvarnakanti</h3>
+		<img src="images/headshot.jpg" alt="Ruthvik Headshot image" width="50">
 		</div>
 		<div id="main">
 			<p>A Simple HTML Page</p>
 			Using the <a href="https://www.w3schools.com/html">W3 Schools Template</a>
 			<hr>
-			<b>Interaction with HTTP Forms</b>
-			<div id="main">
-		<p> this is a simple html page</p>
-		Using the <a href="https://www.w3schools.com/html/"> W3Schools template </a>
-
-		<hr>
-		<b>Interaction with forms</b>
+			<b>Interaction with forms</b>
 		<div>
 			<i> Form with an HTTP GET request</i>
 			<form action="/echo.php" method="GET">
@@ -62,13 +59,13 @@ Included file `waph-suvarnrk.html`:
 			</form>
 
 		</div>
-			<div>
-				<i>Form with HTTP POST Request</i>
-				<form action="/echo.php" method="POST">
-				<lable for="data">Enter the input text</lable>
-				<input type="text" name="data" onkeyup="console.log('you have clicked a Key')">
-				<input type="submit" value="submit">
-				</form>
+		<div>
+			<i> Form with an HTTP POST request</i>
+			<form action="/echo.php" method="GET" name="echo_post">
+				Your Input: <input name="input" onkeypress="console.log('You pressed a key')">
+				<input type="submit" value="Submit">
+				
+			</form>
 			</div>
 		</div>
 	</div>
@@ -77,7 +74,9 @@ Included file `waph-suvarnrk.html`:
 </html>
 ```
 
-![A simple HTML Page](images/task1v1.png)
+![A simple HTML Page](images/simplehtml.png)
+
+![A simple HTML Page](images/html-forms1.png)
 
 ### Task 2. Simple JavaScript
 
@@ -87,67 +86,75 @@ This task has given a basic overview of JS syntax and different ways of integrat
  
 ```HTML
  	 <div>
-		<b>Experiments with JavaScript code</b><br>
+		<hr>
+		<b>Experiments with Javascript</b><br>
 		<i>Inlined JavaScript</i>
-		<div id="inlineDate"
-        	onClick="document.getElementById('inlineDate').innerHTML=Date();
-        	console.log('you have clicked a Key');">
-        	Click to display time and date</div>
+		<div id="date" onclick="document.getElementById('date').innerHTML= Date()"> 		 Click here to Show Date()</div>
 	</div>
 ```
-![Console screen when clicked](images/task1v2b.png)
+
+![Display date/time when clicked](images/js-1.png)
+
+![Display digital clock](images/js-2.png)
+
+![show email when clicked](images/js-3.png)
+
+![Display analog clock](images/js-4.png)
+
 -JavaScript code in a <script> tag to display a digital clock.
 ```HTML
-  <script>
-		function displayTime() {
-			document.getElementById('digital-clock').innerHTML=" The current Time is : "+ Date();
-		}
-		setInterval(displayTime,500);
-</script>
+  <script type="text/javascript">
+			function displayTime(){
+				document.getElementById('digit-clock').innerHTML ="Current time:" + new Date();
+			}
+			setInterval(displayTime,500);
+		</script>
 ```
  
 -JS code in JS file and and code in HTML page to show or hide email when clicked.
 ```JavaScript
-	var visible = false;
-	function showhideEmail(){
- 	 if (visible){
-   	 	document.getElementById('email').innerHTML=" Show my Email";
-    		visible=false;
- 		 }
-	else{
-    	var myEmail="<a href='mailto:suvarnrk" +"@"+
-                "mail.uc.edu'>suvarnrk"+"@"+"mail.uc.edu</a>";
-    	document.getElementById('email').innerHTML=Show my email;
-    	visible= true;
-  		}
+	var shown=false;
+function showhideEmail(){
+	if(shown){
+		document.getElementById('email').innerHTML="Show ny email";
+		shown =false;
+	}else{
+		var myemail="<a href='mailto:suvarnrk"+"@"+"mail.uc.edu'>suvarnrk"+"@"+"mail.uc.edu</a>";
+		document.getElementById('email').innerHTML=myemail;
+		shown=true;
 	}
+}
+	
 ```
 
 ```HTML
-	<div id="email" onclick="showhideEmail()">Show my Email</div>
+	<div id="email" onclick="showOrHideEmail()">Show my email</div>
 	<script type="text/javascript" src="email.js"></script>
 ```
 
-![Console screen when clicked](images/task1v2.png)
+
 
 -Displaying an Analog clock with an external Javascript code and code in HTML page.
 ```HTML
 <canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
 <script src="https://waph-uc.github.io/clock.js"></script>
 <script type=text/javascript>
-			var canvas=document.getElementById("analog-clock");
-			var ctx=canvas.getContext("2d");
-			var radius = canvas.height/2;
-			ctx.translate(radius,radius);
-			radius=radius*0.90;
-			setInterval(drawClock,1000);
-			function drawClock(){
-				drawFace(ctx,radius);
-				drawNumbers(ctx,radius);
-				drawTime(ctx,radius);
-				}
+			const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
 </script>
 ```
+
+
 ## Part II - Ajax, CSS, jQuery, and Web API integration
 
 ### Task 1: Ajax
@@ -156,35 +163,23 @@ HTML code is written to take the user input and make a GET call to echo.php usin
 as it is a get call the input was sent as a path variable in the URL.
 ```HTML
 	<div>
-		<i>AJAX Requests</i><br>
-		<lable for="data">Enter the input text</lable>
-		<input type="text" name="data" id="data">
-		<input type="submit" value="Ajax Echo" onclick="getEcho()">
+		<i> Ajax Requests</i><br>
+		Your Input: 
+		<input name="data"
+		onkeypress="console.log('You have pressed a key ')" id="data">
+		<input type="button" class="button round" value="Ajax Echo" onclick="getEcho()">
 		<div id="response"></div>
-	</div>
-	<script>
-		function getEcho(){
-			var input = document.getElementById("data").value;
-			if(input.length==0){
-			return ;
-			}
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function(){
-		//alert("readyState "+ this.readyState +", status "+this.status+", statusText= "+this.statusText);
-			if(this.readyState==4 && this.status==200){
-				console.log("Received data= "+xhttp.responseText);
-				document.getElementById("response").innerHTML= xhttp.responseText;
-			}
-			}
-			xhttp.open("GET", "echo.php?data="+input, true);
-			xhttp.send();
-			document.getElementById("data").value="";
-			}
+			<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
+				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+				<input class="button round" type="submit" value="Guess Age" onclick="guessAge($('#data').val())">
+				<div id="response"></div>
 	</script>
 ```
 The response for the Ajax call was analyezed in the inspect view. The request method was GET and the status code is 200OK and the input data was passed within the URL.
-![Making an Ajax get call with Tulasiram as input](images/task2v1.png)
-![Inpecting the response of Ajax call](images/task2v11.png)
+
+
+![Making an Ajax get call and inspecting respponse](images/ajax-1.png)
+
 
 ### Task 2: CSS
 
@@ -193,34 +188,31 @@ The response for the Ajax call was analyezed in the inspect view. The request me
 <body style="background-color: powderblue;">
 <h1 style="color: blue;">Web Application Programming and Hacking</h1>
 ```
-![modifed webpage after adding inline CSS](images/task2v2-0.png)
+![webpage after adding inline CSS](images/css-1.png)
 
 **b)** Internal CSS.
 ```HTML
 	<style>
 		.button{
-			background-color:#4CAF50;
-			border:none;
-			color:white;
-			padding:5px;
-			text-align:center;
-			text-decoration:none;
-			display:inline-block;
-			font-size:12px;
-			margin:4px2px;
-			cursor:pointer;
+			background-color:green;
+			border: none;
+			color: white;
+			padding: 5px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 12px;
+			margin: 4px 2px;
+			cursor: pointer;
 		}
-		.round{
-			border-radius:8px;
-		}
-		#response{
-			background-color:#ff9800;
+		.round{border-radius: 8px;}
+		#response{background-color: orange;}
 		}
 	<!-- HTML code -->
 	</style>
-	<input class="button round" type="submit" value="Ajax Echo" onclick="getEcho()">
-	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-	<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+	input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
+				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+				<input class="button round" type="submit" value="Guess Age" onclick="guessAge($('#data').val())">
 	<div id="response"></div>
 ```
 **c)** External CSS from the remote repository provided in the lecture.[https://waph-uc.github.io/style1.css](https://waph-uc.github.io/style1.css).
@@ -235,7 +227,7 @@ The response for the Ajax call was analyezed in the inspect view. The request me
 		</div>
 	</div>
 ```
-![web page after adding internal CSS and external CSS](images/task2v2.png)
+![web page after adding internal CSS and external CSS](images/css.png)
 
 ### Task 3: JQuery
 
@@ -263,7 +255,7 @@ JQuery library has been added to the HTML code.
 			}
 	</script>
 ```
-![JQuery Ajax GET request to echo.php](images/task2v3-1.png)
+![JQuery Ajax GET request to echo.php](images/jquery-GET.png)
 
 **i.** Ajax POST request to echo.php , the response is analyzed in the inpect view. The call was POST and status code was 200OK.
 
@@ -287,15 +279,26 @@ JQuery library has been added to the HTML code.
 			}
 	</script>
 ```
-![JQuery Ajax POST request to echo.php](images/Task2v3-2.png)
+![JQuery Ajax POST request to echo.php](images/jquery-POST.png)
 
 ### Task 4: WEB API Integration.
 
 **i.** Using Ajax on [https://v2.jokeapi.dev/joke/Programming?type=single](https://v2.jokeapi.dev/joke/Programming?type=single)
 
+
+
+
 JavaScript code using JQuery Ajax has been written to make a GET call to the above web service. The response was in JSON , this response was converted to string using JSON.stringify() method and displayed in the console.
 out of this response the joke was filtered using result.joke , this service returns a random joke which is displayed when the webpage is loaded.
 Refreshing the webpage gives random joke each time.
+
+![Random Joke displayed when the page is loaded](images/jokeapi.png)
+
+The above picture represents image of randomly created joke when page is loaded.
+
+![Response of the webservice in inspect view](images/jokeresp.png)
+
+
 ```HTML
 	<!-- HTML code -->
 	<script>
@@ -306,8 +309,6 @@ Refreshing the webpage gives random joke each time.
 	</script>
 	<!-- HTML code -->
 ```
-![Random Joke displayed when the page is loaded](images/task2v4-1a.png)
-![Response of the webservice in inspect view](images/task2v4-1b.png)
 
 **ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
 fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
@@ -324,7 +325,7 @@ fetch method in Javascript is used to make HTTP request to the above webservice.
 ![Response from api.agify.io](images/task2v4-2.png)
 
 Below is the final webPage after completing all the tasks.
-![Lab 2 waph-nakkantm.html](images/finalLab2.png)
+![Ruthvik Suvarnakanti Final Page](images/final.png)
 
 Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
 
