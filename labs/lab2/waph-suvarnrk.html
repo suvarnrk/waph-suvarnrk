@@ -221,6 +221,7 @@ function drawHand(ctx, pos, length, width) {
 				});
 			async function guessAge(value){
 				const response= await fetch("https://api.agify.io/?name="+value);
+				//const response= await fetch("https://api.agify.io/?name="+value);
 				const result= await response.json();
 				$("#response").html("Hello "+value+" ,your age should be "+result.age);
 			}
