@@ -1,3 +1,4 @@
+
 # WAPH-Web Application Programming and Hacking
 
 ## Instructor: Dr. Phu Phung
@@ -8,113 +9,323 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
+![Ruthvik Headshot](images/headshot.jpg)
 
-## Lab 1 - Foundations of the WEB
+## Lab 2 - Front End Web Development
 
-**Overview**: This lab deals with web technologies , HTTP protocol and basic web application programming. Focusing on Wireshark and TELNET for examining the HTTP requests, responses and comparing them with broswer sent requests.
-Moving on to the web application programming I got familiarized with develepment of CGI programs in C and incorporating HTML templates. Additionally this lab covers PHP web application development. The final task explores HTTP GET and POST request utilizing wireshark and curl.
-The Labs1 report was written in Markdown format and Pandoc tool was used to genearate the PDF report for submission.
+**Overview**: In this hands-on lab about front-end development, we kick things off by creating an HTML webpage with forms. We dive into JavaScript, exploring different integration methods, from inline code to external files and remote repositories. To make the webpage visually appealing, we apply CSS through inline, internal, and external styles. jQuery steps in for AJAX calls to echo.php which is done in lab 1, and we spice things up by integrating web services for random jokes and age guessing using jQuery Ajax and the Fetch API. To wrap it up, we convert our documentation into a PDF using Pandoc, capturing the essence of this diverse learning experience.
 
-[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab1/README.md)
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab2/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab2/README.md)
+## Part 1 : Basic HTML with forms, and JavaScript
 
-## Part 1 : The WEB and the HTTP Protocol
+### Task 1. HTML
 
-### Task 1. Familiar with the Wireshark tool and HTTP protocol
+A simple HTML webpage was developed as part of this task which includes basic tags such as `<h1>`,`<h2>`,`<h3>`,`<a>`,`<img>` , `<form>` etc.
+The file created was named waph-nakkantm.html
 
-A popular tool for analyzing network packets and protocols, Wireshark records and shows intricate packet data to aid with network problems. Installing it on Ubuntu virtual machines, checking the version, and using it to examine and solve network problems are all possible. Firstly, Install Wireshark in ubuntu using commands from terminal. Open the Wireshark and filter the captures with “any” using which results in all traffics happening. Filter the displaying packets using “http”. Give a request in the browser , here I have given “http://example.com/index.html” as a request and observed the packets in the Wireshark by filtering http in the displayed packets. There will be a HTTP GET request and HTTP response for the request given in browser, we need to capture those packets as part of one this module.
+Included file `waph-suvarnrk.html`:
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WAPH- Ruthvik Suvarnakanti- IT student</title>
+</head>
+<body>
+<div >
+	<div id="top">
+		<h1>Web Application Programming and Hacking</h1>
+		<h2>Front End Development Lab </h2>
+		<h3>Instructor : Dr Phu Phung</h3>
+	</div>
+	<div >
+		<div id="menubar">
+		<h3>Student: Ruthvik Suvarnakanti</h3>
+		<img src="images/headshot.JPEG" alt="My Headshot" width="50">
+		</div>
+		<div id="main">
+			<p>A Simple HTML Page</p>
+			Using the <a href="https://www.w3schools.com/html">W3 Schools Template</a>
+			<hr>
+			<b>Interaction with HTTP Forms</b>
+			<div id="main">
+		<p> this is a simple html page</p>
+		Using the <a href="https://www.w3schools.com/html/"> W3Schools template </a>
 
+		<hr>
+		<b>Interaction with forms</b>
+		<div>
+			<i> Form with an HTTP GET request</i>
+			<form action="/echo.php" method="GET">
+				Your Input: <input name="input">
+				<input type="submit" value="Submit">
+			</form>
 
-![Wireshark HTTP Request](images/HTTPReq.png)
-
-![Wireshark HTTP Response](images/HTTPResp.png)
-
-![Wireshark HTTP Stream](images/HTTPStream.png)
-
-### Task 2. Understanding HTTP using telnet and Wireshark
-
-Wireshark was started to capture the network packets before making the HTTP request to exmaple.com/index.html via TELNET through the terminal. For using the TELNET first the connection was established to the exmaple.com webserver through the syntax telnet example.com portNumber. After the connection is established the type of request , path file , http version and host name were given for making the HTTP Request. And the response was received after clicking on the enter twice.
-
-![Telnet request](images/TelnetReq.png)
-
-Telnet, a network application utilizing the telnet protocol, facilitates TCP connections to servers for data exchange. In this task we will be requesting the example.com/index.html through telnet instead of using browser request. Connection should be established firstly between the telnet and example.com webserver using command “telnet example.com 80” here 80 is the port number. After a successful connection is established, GET command and Host commands are entered manually to get the required response. 
-
-![Telnet request in wireshark](images/Telnet_wireshark_req.png)
-
-The HTTP replies in Wireshark were identical whether viewed using a browser and TELNET.
-
-![Telent response in wireshark](images/Telnet_wireshark_resp.png)
-
-
-## Part 2 - Basic Web Application Programming
-
-### Task 1: CGI Web applications in C
-
-A. CGI is a commonly used protocol allowing web servers to communicate with external applications by executing them as command-line programs. To write a C "Hello World!" CGI program, write a script that outputs "Hello World CGI! From Ruthvik Suvarnakanti, WAPH." The code may be run as a standard binary application and built using gcc installable with “$ sudo apt install gcc”. After creating a helloworld.c program copy it to the helloworld.cgi in cgi-bin folder. After entering the commands, enter ” http://localhost/cgi-bin/helloworld.cgi “  you will get the response in the browser for which the code you entered.
-
-![CGI program in C](images/CGI_IN_C.png)
-
-B. I enhanced my CGI programming in C by integrating a basic HTML template featuring the course name as the title and student details. After compiling the code with gcc, I placed the resulting file in usr/lib/cgi-bin for browser access.
-
-
-![CGI in C and HTML](images/CGI_IN_C_HTML.png)
-
-Included file `helloworld.c`:
-```C
-    #include<stdio.h>
-    int main() {
-    const char *htmlContent = "<!DOCTYPE html> <html> <head> <title>Web Application Programming and Hacking</title>"
-                              "</head> <body> <h1>Student: Ruthvik Suvarnakanti</h1>"
-                              "<p>This exercise is done as part of Lab1 assessment i.e CGI Web Applications with C.</p></body></html>";
-
-    printf("Content-Type: text/html\n\n");
-    printf("%s", htmlContent);
-    return 0;
-}
+		</div>
+			<div>
+				<i>Form with HTTP POST Request</i>
+				<form action="/echo.php" method="POST">
+				<lable for="data">Enter the input text</lable>
+				<input type="text" name="data" onkeyup="console.log('you have clicked a Key')">
+				<input type="submit" value="submit">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>		
+</body>
+</html>
 ```
 
-### Task 2: A simple PHP Web Application with user input.
+![A simple HTML Page](images/task1v1.png)
 
-A. In the labs/lab1 folder of your private repository, create a new file named helloworld.php. The file should contain content that utilizes the echo language construct in PHP for printing strings from texts or expressions. The echo construct can be employed with or without parentheses, wrapping texts within either double or single quotes. Additionally, phpinfo() is included to display PHP information on the server for testing purposes only. Deploy the code to the root directory of the webserver using the following commands$ cd <path-to-the-folder> $ sudo cp helloworld.php /var/www/html
-Browsers should be able to view the deployed page at http://<192.167.9.212>/helloworld.php.
+### Task 2. Simple JavaScript
 
-![helloWorld.php](images/helloWorldphp.png)
+This task has given a basic overview of JS syntax and different ways of integrating javaScript code in HTML file.
 
-Included file `helloworld.php`:
-```PHP
-<?php
-    echo "Hello World! This is my first PHP program, Ruthvik Suvarnakanti , WAPH";
-?>
+-Inline JS code was written to display current date and time when clicked ,as well as to log the on click event on the console.
+ 
+```HTML
+ 	 <div>
+		<b>Experiments with JavaScript code</b><br>
+		<i>Inlined JavaScript</i>
+		<div id="inlineDate"
+        	onClick="document.getElementById('inlineDate').innerHTML=Date();
+        	console.log('you have clicked a Key');">
+        	Click to display time and date</div>
+	</div>
+```
+![Console screen when clicked](images/task1v2b.png)
+-JavaScript code in a <script> tag to display a digital clock.
+```HTML
+  <script>
+		function displayTime() {
+			document.getElementById('digital-clock').innerHTML=" The current Time is : "+ Date();
+		}
+		setInterval(displayTime,500);
+</script>
+```
+ 
+-JS code in JS file and and code in HTML page to show or hide email when clicked.
+```JavaScript
+	var visible = false;
+	function showhideEmail(){
+ 	 if (visible){
+   	 	document.getElementById('email').innerHTML=" Show my Email";
+    		visible=false;
+ 		 }
+	else{
+    	var myEmail="<a href='mailto:suvarnrk" +"@"+
+                "mail.uc.edu'>suvarnrk"+"@"+"mail.uc.edu</a>";
+    	document.getElementById('email').innerHTML=Show my email;
+    	visible= true;
+  		}
+	}
 ```
 
-B. Using the echo function, I've developed a simple PHP web application that outputs the path variable obtained from HTTP queries. It's crucial to remember that using PHP's $_REQUEST('data') to record path variables in GET and POST requests exposes you to security flaws including remote code execution, SQL injections, and data manipulation. It is essential to apply input validation, use prepared statements for SQL inputs, and sanitize user inputs in order to reduce these risks.
-
-![echo.php](images/echophp.png)
-
-Included file `echo.php`:
-```PHP
-<?php
-    $inputData = $_REQUEST["input"];
-    echo $inputData ;
-?>
+```HTML
+	<div id="email" onclick="showhideEmail()">Show my Email</div>
+	<script type="text/javascript" src="email.js"></script>
 ```
 
-### Task 3: Understanding HTTP GET and POST requests.
+![Console screen when clicked](images/task1v2.png)
 
-A. The call made by the browser was a standard HTTP GET request, and it used the "?" character in the URL syntax i.e., IPaddress/echo.php?input="value" to send the path variable. The result included the input variable after that. Wireshark was used to examine the request itself, the response, and HTTP stream in its entirety. 
+-Displaying an Analog clock with an external Javascript code and code in HTML page.
+```HTML
+<canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
+<script src="https://waph-uc.github.io/clock.js"></script>
+<script type=text/javascript>
+			var canvas=document.getElementById("analog-clock");
+			var ctx=canvas.getContext("2d");
+			var radius = canvas.height/2;
+			ctx.translate(radius,radius);
+			radius=radius*0.90;
+			setInterval(drawClock,1000);
+			function drawClock(){
+				drawFace(ctx,radius);
+				drawNumbers(ctx,radius);
+				drawTime(ctx,radius);
+				}
+</script>
+```
+## Part II - Ajax, CSS, jQuery, and Web API integration
 
-![HTTP GET request in WireShark](images/wiresharkReq.png)
+### Task 1: Ajax
 
-![HTTP response in WireShark](images/wiresharkResp.png)
+HTML code is written to take the user input and make a GET call to echo.php using AJAX. The response recieved is then displayed within the div.
+as it is a get call the input was sent as a path variable in the URL.
+```HTML
+	<div>
+		<i>AJAX Requests</i><br>
+		<lable for="data">Enter the input text</lable>
+		<input type="text" name="data" id="data">
+		<input type="submit" value="Ajax Echo" onclick="getEcho()">
+		<div id="response"></div>
+	</div>
+	<script>
+		function getEcho(){
+			var input = document.getElementById("data").value;
+			if(input.length==0){
+			return ;
+			}
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+		//alert("readyState "+ this.readyState +", status "+this.status+", statusText= "+this.statusText);
+			if(this.readyState==4 && this.status==200){
+				console.log("Received data= "+xhttp.responseText);
+				document.getElementById("response").innerHTML= xhttp.responseText;
+			}
+			}
+			xhttp.open("GET", "echo.php?data="+input, true);
+			xhttp.send();
+			document.getElementById("data").value="";
+			}
+	</script>
+```
+The response for the Ajax call was analyezed in the inspect view. The request method was GET and the status code is 200OK and the input data was passed within the URL.
+![Making an Ajax get call with Tulasiram as input](images/task2v1.png)
+![Inpecting the response of Ajax call](images/task2v11.png)
+
+### Task 2: CSS
+
+**a)** Inline CSS
+```HTML
+<body style="background-color: powderblue;">
+<h1 style="color: blue;">Web Application Programming and Hacking</h1>
+```
+![modifed webpage after adding inline CSS](images/task2v2-0.png)
+
+**b)** Internal CSS.
+```HTML
+	<style>
+		.button{
+			background-color:#4CAF50;
+			border:none;
+			color:white;
+			padding:5px;
+			text-align:center;
+			text-decoration:none;
+			display:inline-block;
+			font-size:12px;
+			margin:4px2px;
+			cursor:pointer;
+		}
+		.round{
+			border-radius:8px;
+		}
+		#response{
+			background-color:#ff9800;
+		}
+	<!-- HTML code -->
+	</style>
+	<input class="button round" type="submit" value="Ajax Echo" onclick="getEcho()">
+	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
+	<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+	<div id="response"></div>
+```
+**c)** External CSS from the remote repository provided in the lecture.[https://waph-uc.github.io/style1.css](https://waph-uc.github.io/style1.css).
+
+```HTML
+	<link rel="stylesheet" type="text/css" href="https://waph-uc.github.io/style1.css">
+	<!-- HTML code -->
+	<div class="container wrapper">
+	<!-- HTML code -->
+		<div class="wrapper">
+	<!-- HTML code -->
+		</div>
+	</div>
+```
+![web page after adding internal CSS and external CSS](images/task2v2.png)
+
+### Task 3: JQuery
+
+JQuery library has been added to the HTML code. 
+2 corresponding buttons i.e Jquery Ajax Get and Jquery Ajax Post have been added to make GET and POST calls respectively using Jquery to echo.php.
+**i.** Ajax GET request to echo.php , the response is analyzed in the inpect view. The call was GET and status code was 200OK.
+
+```HTML
+	<!-- HTML code -->
+	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
+	<!-- HTML code -->
+	<script>
+		function getJqueryAjax(){
+			var input=$("#data").val();
+				if(input.length==0)
+					return;
+			$.get("echo.php?data="+input,
+				      function(result){
+					      printResult(result);
+						});
+			$("#data").val("");
+			}
+		function printResult(result){
+			$("#response").html(result);
+			}
+	</script>
+```
+![JQuery Ajax GET request to echo.php](images/task2v3-1.png)
+
+**i.** Ajax POST request to echo.php , the response is analyzed in the inpect view. The call was POST and status code was 200OK.
+
+```HTML
+	<!-- HTML code -->
+	<input class="button round" type="submit"
+		value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
+	<!-- HTML code -->
+	<script>
+		function getJqueryAjaxPost(){
+			var input=$("#data").val();
+			if(input.length==0)
+				return;
+			$.post("echo.php",{data:input},function(result){
+					printResult(result);
+					});
+			$("#data").val("");
+			}
+		function printResult(result){
+			$("#response").html(result);
+			}
+	</script>
+```
+![JQuery Ajax POST request to echo.php](images/Task2v3-2.png)
+
+### Task 4: WEB API Integration.
+
+**i.** Using Ajax on [https://v2.jokeapi.dev/joke/Programming?type=single](https://v2.jokeapi.dev/joke/Programming?type=single)
+
+JavaScript code using JQuery Ajax has been written to make a GET call to the above web service. The response was in JSON , this response was converted to string using JSON.stringify() method and displayed in the console.
+out of this response the joke was filtered using result.joke , this service returns a random joke which is displayed when the webpage is loaded.
+Refreshing the webpage gives random joke each time.
+```HTML
+	<!-- HTML code -->
+	<script>
+	$.get("https://v2.jokeapi.dev/joke/Programming?type=single",function(result){
+				console.log("from joke API: "+ JSON.stringify(result));
+				$("#response").html("Programming joke of the day: " +result.joke);
+				});
+	</script>
+	<!-- HTML code -->
+```
+![Random Joke displayed when the page is loaded](images/task2v4-1a.png)
+![Response of the webservice in inspect view](images/task2v4-1b.png)
+
+**ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
+fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
+```HTML
+	<script>
+	async function guessAge(name){
+				const response= await fetch("https://api.agify.io/?name="+name);
+				const result= await response.json();
+				$("#response").html("Hello "+name+" ,your age should be "+result.age);
+			}
+	</script>
+```
+![HTTP request to api.agify.io](images/task2v4-2a.png)
+![Response from api.agify.io](images/task2v4-2.png)
+
+Below is the final webPage after completing all the tasks.
+![Lab 2 waph-nakkantm.html](images/finalLab2.png)
+
+Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
 
 
-B. A command-line program called Client URL (cURL) is intended for data processing over various network protocols. In this case, I sent a POST call to the echo.php endpoint using cURL in the terminal. This required utilizing the cURL command-line tool to deliver data to the server using the HTTP POST protocol.
-
-curl -X POST localhost/echo.php -d "input= Ruthvik"
-
-![HTTP POST request using CURL](images/curlpost.png)
-
-![HTTP Stream in Wireshark](images/postwiresharkstream.png)
-
-
-C.An analysis tool such as Wireshark may be used to compare the similarities between HTTP GET and POST requests, which are essential for client-server communication and contain request headers and response codes. Interestingly, they communicate data differently: POST uses the HTTP body, whereas GET uses the URL. GET is usually used for retrieving, whereas POST is used for updating, and POST is seen to be more secure. The GET and POST replies in the echo.php web application are the same. The project report also had a Labs/Lab1 folder created for it, and the README.md file was used to construct the report using the Pandoc tool.
