@@ -294,7 +294,7 @@ Refreshing the webpage gives random joke each time.
 
 ![Random Joke displayed when the page is loaded](images/jokeapi.png)
 
-The above picture represents image of randomly created joke when page is loaded.
+The below picture represents image of randomly created joke when page is loaded.
 
 ![Response of the webservice in inspect view](images/jokeresp.png)
 
@@ -310,7 +310,16 @@ The above picture represents image of randomly created joke when page is loaded.
 	<!-- HTML code -->
 ```
 
+
+
+
+
+
+
+
 **ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
+
+
 fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
 ```HTML
 	<script>
@@ -321,10 +330,17 @@ fetch method in Javascript is used to make HTTP request to the above webservice.
 			}
 	</script>
 ```
-![HTTP request to api.agify.io](images/task2v4-2a.png)
-![Response from api.agify.io](images/task2v4-2.png)
 
-Below is the final webPage after completing all the tasks.
+The pictures of API calls are not responsive as there are too many request to API and gettting a status of 429 which is meant for request limit reached. I am attaching the pictures of the same here.
+
+![HTTP request to API](images/api-1.png)
+
+Belwo is the response of the API call.
+
+![Response from API](images/api-2.png)
+
+Below is the final webPage after completing all the tasks and following the lectures.
+
 ![Ruthvik Suvarnakanti Final Page](images/final.png)
 
 Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
