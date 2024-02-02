@@ -22,7 +22,7 @@
 ### Task 1. HTML
 
 
-As part of this task, we developed a basic HTML webpage named "waph-nakkantm.html." The webpage incorporates essential tags like <h1>, <h2>, <h3>, <a>, <img>, and <form>. These tags structure the content, create headings, hyperlinks, and images, making the webpage interactive and visually appealing.
+As part of this task, we developed a basic HTML webpage named "waph-suvarnrk.html." The webpage incorporates essential tags like <h1>, <h2>, <h3>, <a>, <img>, and <form>. These tags structure the content, create headings, hyperlinks, and images, making the webpage interactive and visually appealing.
 
 Included file `waph-suvarnrk.html`:
 ```HTML
