@@ -13,10 +13,8 @@
 
 ## Lab 2 - Front End Web Development
 
-**Overview**: This lab deals with Front End Development. This lab gave overview about basic HTML, Javascript , Ajax, CSS, 
-JQuery library in JS, and web API integration. Part 1 of this lab is to design  HTML web page with basic tags and forms. Then Javascript is integrated in 4 ways that is with inline JS, JS with script tag , JS with external file and JS code from a remote repository.
-This HTML page was then integrated with CSS . Inline CSS, internal CSS and External CSS have been used to make the webpage look elegant. Then Jquery is used to make AJAX get and post calls to echo.php. Lastly 2 web services one is for generating a random joke and the other one is to guess age are integrated into this HTML code using Jquery Ajax and fetch method respectively.
-Pandoc is used to generate the PDF file from the README.md
+**Overview**: In this hands-on web development lab, we begin by constructing a simple HTML page, tossing in essential tags and forms to lay the groundwork. Then, we delve into JavaScript, tackling it from various angles: embedding it directly, using the script tag, linking to an external file, and even pulling code from a remote repository. To tackle up the look of our webpage, we play around with CSS – going for inline, internal, and external styles to make things visually appealing. Now, here comes jQuery, our trusty sidekick. It helps us pull off some slick AJAX calls, reaching out to the echo.php file that is needed to be reused from lab 1 for some asynchronous action. But we're not stopping there. We bring in two web services using jQuery and the fetch method – one for serving up random jokes and the other for taking a crack at guessing ages. And to put the finishing touches on our project, we enlist Pandoc to effortlessly transform our README.md into a published PDF file.
+
 [https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md)
 
 \pagebreak
@@ -25,8 +23,7 @@ Pandoc is used to generate the PDF file from the README.md
 
 ### Task 1. HTML
 
-A simple HTML webpage was developed as part of this task which includes basic tags such as `<h1>`,`<h2>`,`<h3>`,`<a>`,`<img>` , `<form>` etc.
-The file created was named waph-suvarnrk.html
+As part of this task, we developed a basic HTML webpage named "waph-nakkantm.html." The webpage incorporates essential tags like <h1>, <h2>, <h3>, <a>, <img>, and <form>. These tags structure the content, create headings, hyperlinks, and images, making the webpage interactive and visually appealing.
 
 Included file `waph-suvarnrk.html`:
 ```HTML
@@ -85,9 +82,7 @@ Included file `waph-suvarnrk.html`:
 
 ### Task 2. Simple JavaScript
 
-This task has given a basic overview of JS syntax and different ways of integrating javaScript code in HTML file.
-
--Inline JS code was written to display current date and time when clicked ,as well as to log the on click event on the console.
+In this task, we got a simple introduction to JavaScript syntax and explored various methods of adding JavaScript code into an HTML file. We played around with Inline JS, where we wrote code to show the current date and time when clicked. Additionally, we logged the click event on the console for a bit of behind-the-scenes action.
  
 ```HTML
  	 <div>
@@ -165,8 +160,8 @@ function drawClock() {
 
 ### Task 1: Ajax
 
-HTML code is written to take the user input and make a GET call to echo.php using AJAX. The response recieved is then displayed within the div.
-as it is a get call the input was sent as a path variable in the URL.
+We wrote HTML code that captures user input and uses AJAX to make a GET call to echo.php. The received response is then showcased within a designated div. Since it's a GET call, the input was transmitted as a path variable in the URL.
+
 ```HTML
 	<div>
 		<i> Ajax Requests</i><br>
@@ -181,8 +176,7 @@ as it is a get call the input was sent as a path variable in the URL.
 				<div id="response"></div>
 	</script>
 ```
-The response for the Ajax call was analyezed in the inspect view. The request method was GET and the status code is 200OK and the input data was passed within the URL.
-
+We examined the Ajax call response in the inspect view, observing that the request method was GET, the status code indicated a successful 200 OK, and the input data was transmitted within the URL.
 
 ![Making an Ajax get call and inspecting respponse](images/ajax-1.png)
 
@@ -239,8 +233,7 @@ The response for the Ajax call was analyezed in the inspect view. The request me
 \pagebreak
 ### Task 3: JQuery
 
-JQuery library has been added to the HTML code. 
-2 corresponding buttons i.e Jquery Ajax Get and Jquery Ajax Post have been added to make GET and POST calls respectively using Jquery to echo.php.
+We included the jQuery library in the HTML code, incorporating two buttons one for jQuery Ajax GET and the other for jQuery Ajax POST. These buttons are designed to initiate GET and POST calls, respectively, to echo.php using jQuery. In the case of the Ajax GET request to echo.php, we inspected the response in the view, noting that it was a GET call with a status code of 200 OK.
 **i.** Ajax GET request to echo.php , the response is analyzed in the inpect view. The call was GET and status code was 200OK.
 
 ```HTML
@@ -298,9 +291,7 @@ JQuery library has been added to the HTML code.
 
 
 
-JavaScript code using JQuery Ajax has been written to make a GET call to the above web service. The response was in JSON , this response was converted to string using JSON.stringify() method and displayed in the console.
-out of this response the joke was filtered using result.joke , this service returns a random joke which is displayed when the webpage is loaded.
-Refreshing the webpage gives random joke each time.
+We wrote JavaScript code with jQuery Ajax to make a GET call to the specified web service. After receiving the response in JSON format, we converted it to a string and displayed it in the console. To extract the joke from this response, we used the result.joke property. This service generates a different random joke each time the webpage is refreshed, adding a touch of humor to the user experience.
 
 ![Random Joke displayed when the page is loaded](images/jokeapi.png)
 
@@ -330,7 +321,8 @@ The below picture represents image of randomly created joke when page is loaded.
 **ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
 
 
-fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
+In JavaScript, the fetch method is employed to initiate an HTTP request to the mentioned web service. Since this is an asynchronous call, the function is marked with the async keyword, and await is utilized to coordinate the response. The HTTP request executed is of the GET type, and a 200 OK status code confirms the success of the operation.
+
 ```HTML
 	<script>
 	async function guessAge(name){
@@ -353,6 +345,6 @@ Below is the final webPage after completing all the tasks and following the lect
 
 ![Ruthvik Suvarnakanti Final Page](images/final.png)
 
-Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
+Following the completion of the lab, a directory named "Lab2" was established to house both the project report and related files. Subsequently, these modifications were pushed to the repository. The project report was generated from the README.md file using the Pandoc tool.
 
 
