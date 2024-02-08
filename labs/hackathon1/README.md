@@ -9,320 +9,237 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.jpg)
+![Ruthvik Suvarnakanti](images/headshot.JPEG)
 
-## Lab 2 - Front End Web Development
 
-**Overview**: This lab deals with Front End Development. This lab gave overview about basic HTML, Javascript , Ajax, CSS, 
-JQuery library in JS, and web API integration. Part 1 of this lab is to design  HTML web page with basic tags and forms. Then Javascript is integrated in 4 ways that is with inline JS, JS with script tag , JS with external file and JS code from a remote repository.
-This HTML page was then integrated with CSS . Inline CSS, internal CSS and External CSS have been used to make the webpage look elegant. Then Jquery is used to make AJAX get and post calls to echo.php. Lastly 2 web services one is for generating a random joke and the other one is to guess age are integrated into this HTML code using Jquery Ajax and fetch method respectively.
-Pandoc is used to generate the PDF file from the README.md
-[https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md)
+## Hackathon 1: Cross-Site Scripting Attacks and Defenses
 
-## Part 1 : Basic HTML with forms, and JavaScript
+**Overview**: The Hackathon centers around understanding and addressing XSS (Cross-Site Scripting) attacks, with participants engaging in two distinct tasks. In the Attack Phase (Task 1), participants are tasked with uncovering and exploiting XSS vulnerabilities within a designated website (http://waph-hackathon.eastus.cloudapp.azure.com/xss/). This site is structured with six levels of vulnerabilities, designed to provide insight into the mechanics of XSS attacks. Following this, in the Defense Phase (Task 2), participants focus on implementing secure coding practices to mitigate XSS threats. Guided by OWASP guidelines, they learn techniques such as input validation and output sanitization to fortify their applications against XSS vulnerabilities effectively. Upon completing both phases, participants document their discoveries and solutions using Markdown format. Utilizing tools like Pandoc, they generate a comprehensive PDF report detailing their experiences, including the vulnerabilities identified, exploitation methods employed, and the strategies adopted to mitigate risks. Overall, the Hackathon serves as a practical learning platform, offering participants hands-on experience in identifying, exploiting, and safeguarding against XSS vulnerabilities, thus fostering a deeper understanding of web security protocols.
 
-### Task 1. HTML
+Link to the repository:
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/hackathon1/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/hackathon1/README.md)
 
-A simple HTML webpage was developed as part of this task which includes basic tags such as `<h1>`,`<h2>`,`<h3>`,`<a>`,`<img>` , `<form>` etc.
-The file created was named waph-nakkantm.html
+\pagebreak
 
-Included file `waph-suvarnrk.html`:
-```HTML
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>WAPH- Ruthvik Suvarnakanti</title>
-</head>
-<body>
-<div >
-	<div id="top">
-		<h1>Web Application Programming and Hacking</h1>
-		<h2>Front End Development Lab </h2>
-		<h3>Instructor : Dr Phu Phung</h3>
-	</div>
-	<div >
-		<div id="menubar">
-		<h3>Student : Ruthvik Suvarnakanti</h3>
-		<img src="images/headshot.jpg" alt="Ruthvik Headshot image" width="50">
-		</div>
-		<div id="main">
-			<p>A Simple HTML Page</p>
-			Using the <a href="https://www.w3schools.com/html">W3 Schools Template</a>
-			<hr>
-			<b>Interaction with HTTP Forms</b>
-			<div>
-				<i>Form with HTTP GET Request</i>
-				<form action="/echo.php" method="GET">
-				<lable for="data">Enter the input text</lable>
-				<input type="text" name="data" onkeyup="console.log('you have clicked a Key')">
-				<input type="submit" value="submit">
-				</form>
-			</div>
-			<div>
-				<i>Form with HTTP POST Request</i>
-				<form action="/echo.php" method="POST">
-				<lable for="data">Enter the input text</lable>
-				<input type="text" name="data" onkeyup="console.log('you have clicked a Key')">
-				<input type="submit" value="submit">
-				</form>
-			</div>
-		</div>
-	</div>
-</div>		
-</body>
-</html>
+## Task 1 : ATTACKS
+
+### Level 0
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level0/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level0/echo.php)
+
+attacking script :
+```JS
+<script>alert("Level 0 : hacked by Ruthvik Suvarnakanti")</script>
 ```
 
-![A simple HTML Page](images/task1v1.png)
+![Level 0](images/lvl0.png)
 
-### Task 2. Simple JavaScript
+\pagebreak
 
-This task has given a basic overview of JS syntax and different ways of integrating javaScript code in HTML file.
+### Level 1
 
--Inline JS code was written to display current date and time when clicked ,as well as to log the on click event on the console.
- 
-```HTML
- 	 <div>
-		<b>Experiments with JavaScript code</b><br>
-		<i>Inlined JavaScript</i>
-		<div id="inlineDate"
-        	onClick="document.getElementById('inlineDate').innerHTML=Date();
-        	console.log('you have clicked a Key');">
-        	Click to display time and date</div>
-	</div>
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level1/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level1/echo.php)
+
+attacking script is passed as a pathvariable at the end of the URL
+```JS
+?input=<script>alert("Level 1: Hacked by Ruthvik Suvarnakanti")</script>
 ```
-![Console screen when clicked](images/task1v2b.png)
--JavaScript code in a <script> tag to display a digital clock.
-```HTML
-  <script>
-		function displayTime() {
-			document.getElementById('digital-clock').innerHTML=" The current Time is : "+ Date();
-		}
-		setInterval(displayTime,500);
-</script>
+![Level 1](images/lvl1.png)
+
+\pagebreak
+
+### Level 2
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level2/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level2/echo.php)
+
+Since the HTTP request for this URL doesn't provide an input field or accept path variables, a workaround was needed. The URL was linked to a simple HTML `<form>`. Through this form, the attacking script is transmitted. This method allows for a more structured and controlled injection of malicious scripts, aiding in the exploration and exploitation of XSS vulnerabilities within the web application. By embedding the attacking script directly into the form submission, participants can interact with the website and observe how their injected code affects it. This approach ensures that XSS attacks are carried out within the web application's environment, giving participants a clearer understanding of the vulnerabilities and their potential consequences for the application's security.
+```JS
+<script>alert("Level 2: Hacked by Ruthvik Suvarnakanti")</script>
+```
+Source code Guess of echo.php:
+```JS
+if(!isset($_POST['input'])){
+   die("{\"error\": \"Please provide 'input' field in an HTTP POST Request\"}");
+echo $_POST['input'];
 ```
  
--JS code in JS file and and code in HTML page to show or hide email when clicked.
-```JavaScript
-	var visible = false;
-	function showhideEmail(){
- 	 if (visible){
-   	 	document.getElementById('email').innerHTML=" Show my Email";
-    		visible=false;
- 		 }
-	else{
-    	var myEmail="<a href='mailto:nakkantm" +"@"+
-                "mail.uc.edu'>nakkantm"+"@"+"mail.uc.edu</a>";
-    	document.getElementById('email').innerHTML=myEmail;
-    	visible= true;
-  		}
+![Level 2](images/lvl2.png)
+
+\pagebreak
+
+### Level 3
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level3/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level3/echo.php)
+
+ In this level, if the `<script>` tag is directly passed in the input variable, it is filtered out. Therefore, to carry out an attack on this URL, the malicious code had to be divided into multiple parts and then appended together to trigger an alert on the webpage. This approach bypasses the filtering mechanism and allows the attacker to execute their payload successfully.
+
+![Level 3](images/lvl3.png)
+ 
+```JS
+?input=<script<script>>alert("Hacked by Ruthvik Suvarnakanti")</scrip</script>t>
+
+```
+Source code Guess of echo.php:
+
+ ```
+str_replace(['<script>', '</script>'], '', $input)
+```
+
+\pagebreak
+
+### Level 4
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level4/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level4/echo.php)
+
+In this level, the filtering mechanism completely blocks the `<script>` tag, even if it's attempted by breaking the string and concatenating it. To inject the XSS script, I utilized the `onerror()` attribute of the `<img>` tag. By leveraging this attribute, I triggered an alert to be raised on the webpage. This approach circumvents the filtering mechanism, allowing the XSS script to execute successfully.
+
+```JS
+?input=<img%20src="..."
+	onerror="alert(Level 4: Hacked by Ruthvik Suvarnakanti)">
+```
+Source code guess of echo.php:
+
+```JS
+$data = $_GET['input']
+if (preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $data)) {
+    exit('{"error": "No \'script\' is allowed!"}');
 	}
+else
+	echo($data);
+
+```
+![Level 4](images/lvl4.png)
+
+\pagebreak
+
+### Level 5
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level5/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level5/echo.php)
+
+In this level, both the `<script>` tag and the `alert()` method are filtered out. To trigger a popup alert, I employed a combination of Unicode encoding and the `onerror()` method of the `<img>` tag. By utilizing these techniques together, I successfully raised a popup alert on the webpage. This method effectively bypasses the filtering mechanisms in place, allowing the XSS payload to execute.
+
+```JS
+?input=<img src="invalid"
+	onerror="\u0061lert(Level 5: Hacked By Ruthvik Suvarnakanti)">
 ```
 
+![Level 5](images/lvl5.png)
+
+
+
+\pagebreak
+
+### Level 6
+
+URL : [http://waph-hackathon.eastus.cloudapp.azure.com/xss/level6/echo.php](http://waph-hackathon.eastus.cloudapp.azure.com/xss/level6/echo.php)
+
+In this level, user input is accepted, but it appears that the source code utilizes the `htmlentities()` method to convert all relevant characters into their corresponding HTML entities. This ensures that the user input is rendered strictly as text on the webpage.
+To trigger an alert on the webpage in this scenario, I utilized JavaScript event listeners such as `onmouseover()`, `onclick()`, and `onkeyup()`. Specifically, I opted for the `onkeyup()` event listener, which generates the alert on the webpage whenever a key is pressed within the input field. This approach allowed me to bypass the HTML entity conversion and successfully execute the desired action.
+
+```JS
+	/" onkeyup="alert('Level 6 : Hacked by Ruthvik Suvarnakanti')"
+```
+on passing the above script in the url , this will append to the code and manipulates the input form element as below.
+
 ```HTML
-	<div id="email" onclick="showOrHideEmail()">Display my Email</div>
-	<script type="text/javascript" src="email.js"></script>
+<form action="/xss/level6/echo.php/"
+	onkeyup="alert('Level 6 : Hacked by Ruthvik Suvarnakanti')" method="POST">
+  Input:<input type="text" name="input" />
+  <input type="submit" name="Submit"/>
+```
+![Level 6](images/lvl6_1.png)
+
+![Level 6 after injecting XSS code](images/lvl6_2.png)
+
+source code guess of echo.php:
+```JS
+	echo htmlentities($_REQUEST('input'));
+```
+\pagebreak
+
+## TASK 2 : DEFENSE
+
+### A . echo.php
+
+The `echo.php` file in Lab 1 has been updated to include input validation and XSS defense measures. Initially, it checks whether the input is empty. If it is, the PHP execution stops. If the input is valid, the `htmlentities()` function is utilized to sanitize the input data. This function converts special characters into their HTML entities, ensuring that the text is displayed as plain text on the webpage. This action serves to protect against XSS attacks by neutralizing any potentially harmful scripts embedded within the input.
+
+![Defense echo.php](images/1.png)
+
+```JS
+if(empty($_REQUEST["data"])){
+        exit("please enter the input field 'data'");
+        }
+    $input=htmlentities($_REQUEST["data"]);
+    echo ("The input from the request is <strong>" .$input. "</strong>.<br>");
 ```
 
-![Console screen when clicked](images/task1v2.png)
 
--Displaying an Analog clock with an external Javascript code and code in HTML page.
-```HTML
-<canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
-<script src="https://waph-uc.github.io/clock.js"></script>
-<script type=text/javascript>
-			var canvas=document.getElementById("analog-clock");
-			var ctx=canvas.getContext("2d");
-			var radius = canvas.height/2;
-			ctx.translate(radius,radius);
-			radius=radius*0.90;
-			setInterval(drawClock,1000);
-			function drawClock(){
-				drawFace(ctx,radius);
-				drawNumbers(ctx,radius);
-				drawTime(ctx,radius);
+\pagebreak
+
+### B . Lab 2 front-end part
+
+The `waph-suvarnrk.html` file underwent a thorough review and update, focusing on identifying and securing areas where external input is accepted. Validation procedures were implemented to ensure the integrity of input data, while measures were taken to sanitize output text to enhance security.
+**i)** In particular, when dealing with HTTP GET and POST request forms, input data is meticulously validated. A new function named `validateInput()` was introduced for this purpose. This function mandates that users provide input text before executing their request. This precautionary measure significantly reduces the risk of receiving invalid or potentially malicious input, thereby fortifying the overall security posture of the application.
+
+![Defense waph-suvarnrk.html](images/2.png)
+
+![Validating HTTP requests input](images/3.png)
+
+\pagebreak
+
+**ii)** In the code, we made a change from using `.innerHTML` to `.innerText` in situations where HTML rendering wasn't necessary, and only plain text needed to be shown. This adjustment ensures that any text content is treated strictly as text, without any interpretation of HTML tags or rendering of elements. By using `.innerText`, we reduce the risk of unintended HTML injection or XSS vulnerabilities, making the display of text content safer within the application.
+
+![modifying innerHTML to innerText](images/4.png)
+
+
+\pagebreak
+
+**iii)** A new function called `encodeInput()` was introduced to sanitize the response. This function converts special characters into their respective HTML entities before inserting them into the HTML document, thereby preventing cross-site scripting attacks. This ensures that the content is displayed purely as text and cannot be executed.
+Moreover, the code creates a new `<div>` element and inserts the content as `innerText` into this newly created element. Subsequently, this content is returned as the HTML content.
+This method guarantees that any potentially harmful content is properly encoded and displayed securely within the HTML document, thus reducing the risk of XSS vulnerabilities. Utilizing `innerText` ensures that the content is treated strictly as text, preventing any unintended HTML rendering or script execution.
+
+```JS
+function encodeInput(input){
+			const encodedData = document.createElement('div');
+			encodedData.innerText=input;
+			return encodedData.innerHTML;
+		}
+```
+
+
+
+
+\pagebreak
+
+**iv)** Additional validations have been introduced for the API [https://v2.jokeapi.dev/joke/Programming?type=single](https://v2.jokeapi.dev/joke/Programming?type=single), used to fetch jokes. These validations now verify if the received result and the `result.joke` in the JSON response are not empty. If either of these values turns out to be null or empty, an error message is generated. This enhancement ensures that only valid and non-empty joke data is handled and presented, thereby enhancing the application's reliability and user experience.
+
+```JS
+if (result && result.joke) {
+		var encodedJoke = encodeInput(result.joke);
+		$("#response").text("Programming joke of the day: " +encodedJoke);
 				}
-</script>
+else{
+		 $("#response").text("Could not retrieve a joke at this time.");
+}
 ```
-## Part II - Ajax, CSS, jQuery, and Web API integration
 
-### Task 1: Ajax
+![handling Joke API and Guess age API](images/5.png)
 
-HTML code is written to take the user input and make a GET call to echo.php using AJAX. The response recieved is then displayed within the div.
-as it is a get call the input was sent as a path variable in the URL.
-```HTML
-	<div>
-		<i>AJAX Requests</i><br>
-		<lable for="data">Enter the input text</lable>
-		<input type="text" name="data" id="data">
-		<input type="submit" value="Ajax Echo" onclick="getEcho()">
-		<div id="response"></div>
-	</div>
-	<script>
-		function getEcho(){
-			var input = document.getElementById("data").value;
-			if(input.length==0){
-			return ;
-			}
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function(){
-		//alert("readyState "+ this.readyState +", status "+this.status+", statusText= "+this.statusText);
-			if(this.readyState==4 && this.status==200){
-				console.log("Received data= "+xhttp.responseText);
-				document.getElementById("response").innerHTML= xhttp.responseText;
-			}
-			}
-			xhttp.open("GET", "echo.php?data="+input, true);
-			xhttp.send();
-			document.getElementById("data").value="";
-			}
-	</script>
+\pagebreak
+
+**v)** In the asynchronous function `guessAge()`, new validations have been added. These validations ensure that both the received result and the user-entered input are not empty, null, or equal to 0. If either the result or the input is found to be in such a state, an error message is thrown. These measures are put in place to uphold data integrity and guarantee the proper functioning of the function across different scenarios, thereby improving its reliability and usability.
+
+```JS
+if(result.age==null || result.age==0)
+   return $("#response")
+   .text("Sorry, the webserver threw an error cannot retrieve your age");
+$("#response").text("Hello "+name+" ,your age should be "+result.age);
 ```
-The response for the Ajax call was analyezed in the inspect view. The request method was GET and the status code is 200OK and the input data was passed within the URL.
-![Making an Ajax get call with Tulasiram as input](images/task2v1.png)
-![Inpecting the response of Ajax call](images/task2v11.png)
 
-### Task 2: CSS
+![Guess age function in case error is thrown](images/7.png)
 
-**a)** Inline CSS
-```HTML
-<body style="background-color: powderblue;">
-<h1 style="color: blue;">Web Application Programming and Hacking</h1>
-```
-![modifed webpage after adding inline CSS](images/task2v2-0.png)
 
-**b)** Internal CSS.
-```HTML
-	<style>
-		.button{
-			background-color:#4CAF50;
-			border:none;
-			color:white;
-			padding:5px;
-			text-align:center;
-			text-decoration:none;
-			display:inline-block;
-			font-size:12px;
-			margin:4px2px;
-			cursor:pointer;
-		}
-		.round{
-			border-radius:8px;
-		}
-		#response{
-			background-color:#ff9800;
-		}
-	<!-- HTML code -->
-	</style>
-	<input class="button round" type="submit" value="Ajax Echo" onclick="getEcho()">
-	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-	<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-	<div id="response"></div>
-```
-**c)** External CSS from the remote repository provided in the lecture.[https://waph-uc.github.io/style1.css](https://waph-uc.github.io/style1.css).
 
-```HTML
-	<link rel="stylesheet" type="text/css" href="https://waph-uc.github.io/style1.css">
-	<!-- HTML code -->
-	<div class="container wrapper">
-	<!-- HTML code -->
-		<div class="wrapper">
-	<!-- HTML code -->
-		</div>
-	</div>
-```
-![web page after adding internal CSS and external CSS](images/task2v2.png)
 
-### Task 3: JQuery
-
-JQuery library has been added to the HTML code. 
-2 corresponding buttons i.e Jquery Ajax Get and Jquery Ajax Post have been added to make GET and POST calls respectively using Jquery to echo.php.
-**i.** Ajax GET request to echo.php , the response is analyzed in the inpect view. The call was GET and status code was 200OK.
-
-```HTML
-	<!-- HTML code -->
-	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-	<!-- HTML code -->
-	<script>
-		function getJqueryAjax(){
-			var input=$("#data").val();
-				if(input.length==0)
-					return;
-			$.get("echo.php?data="+input,
-				      function(result){
-					      printResult(result);
-						});
-			$("#data").val("");
-			}
-		function printResult(result){
-			$("#response").html(result);
-			}
-	</script>
-```
-![JQuery Ajax GET request to echo.php](images/task2v3-1.png)
-
-**i.** Ajax POST request to echo.php , the response is analyzed in the inpect view. The call was POST and status code was 200OK.
-
-```HTML
-	<!-- HTML code -->
-	<input class="button round" type="submit"
-		value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-	<!-- HTML code -->
-	<script>
-		function getJqueryAjaxPost(){
-			var input=$("#data").val();
-			if(input.length==0)
-				return;
-			$.post("echo.php",{data:input},function(result){
-					printResult(result);
-					});
-			$("#data").val("");
-			}
-		function printResult(result){
-			$("#response").html(result);
-			}
-	</script>
-```
-![JQuery Ajax POST request to echo.php](images/Task2v3-2.png)
-
-### Task 4: WEB API Integration.
-
-**i.** Using Ajax on [https://v2.jokeapi.dev/joke/Programming?type=single](https://v2.jokeapi.dev/joke/Programming?type=single)
-
-JavaScript code using JQuery Ajax has been written to make a GET call to the above web service. The response was in JSON , this response was converted to string using JSON.stringify() method and displayed in the console.
-out of this response the joke was filtered using result.joke , this service returns a random joke which is displayed when the webpage is loaded.
-Refreshing the webpage gives random joke each time.
-```HTML
-	<!-- HTML code -->
-	<script>
-	$.get("https://v2.jokeapi.dev/joke/Programming?type=single",function(result){
-				console.log("from joke API: "+ JSON.stringify(result));
-				$("#response").html("Programming joke of the day: " +result.joke);
-				});
-	</script>
-	<!-- HTML code -->
-```
-![Random Joke displayed when the page is loaded](images/task2v4-1a.png)
-![Response of the webservice in inspect view](images/task2v4-1b.png)
-
-**ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
-fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
-```HTML
-	<script>
-	async function guessAge(name){
-				const response= await fetch("https://api.agify.io/?name="+name);
-				const result= await response.json();
-				$("#response").html("Hello "+name+" ,your age should be "+result.age);
-			}
-	</script>
-```
-![HTTP request to api.agify.io](images/task2v4-2a.png)
-![Response from api.agify.io](images/task2v4-2.png)
-
-Below is the final webPage after completing all the tasks.
-![Lab 2 waph-nakkantm.html](images/finalLab2.png)
-
-Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
 
 
