@@ -9,7 +9,7 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.JPEG)
+![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
 
 
 ## Hackathon 1: Cross-Site Scripting Attacks and Defenses
