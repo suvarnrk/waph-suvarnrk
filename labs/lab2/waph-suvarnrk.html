@@ -133,9 +133,23 @@ function drawHand(ctx, pos, length, width) {
 				document.getElementById('digit-clock').innerHTML ="Current time:" + new Date();
 			}
 			setInterval(displayTime,500);
+function validateInput(InputId){
+	var data = document.grtElementById(InputId).value;
+	if(data.length==0){
+		alert("Please enter valid text");
+		return false;
+	}
+	return true;
+}
+
+function encodeInput(input){
+	const encodeData= document.createElement('div');
+	encodeData.innerText=input;
+	return encodeData.innerHTML;
+
 		</script>
 	</div>
-	<div id="main">
+	<div idd="main">
 		<p> this is a simple html page</p>
 		Using the <a href="https://www.w3schools.com/html/"> W3Schools template </a>
 
@@ -143,16 +157,16 @@ function drawHand(ctx, pos, length, width) {
 		<b>Interaction with forms</b>
 		<div>
 			<i> Form with an HTTP GET request</i>
-			<form action="/echo.php" method="GET">
-				Your Input: <input name="input">
+			<form action="/echo.php" method="GET" onsubmit="return validateInput('data-get')">
+				Your Input: <input name="input" id="data-get" onkeyup="console.log('you clicked a key')">
 				<input type="submit" value="Submit">
 			</form>
 
 		</div>
 		<div>
 			<i> Form with an HTTP POST request</i>
-			<form action="/echo.php" method="GET" name="echo_post">
-				Your Input: <input name="input" onkeypress="console.log('You pressed a key')">
+			<form action="/echo.php" method="GET" name="echo_post" onsubmit="return validateInput('data-post')">
+				Your Input: <input name="input" id="data-post" onkeypress="console.log('You pressed a key')">
 				<input type="submit" value="Submit">
 				
 			</form>
@@ -186,7 +200,7 @@ function drawHand(ctx, pos, length, width) {
 				if(this.readyState==4 && this.status==200){
 					console.log("Received data="+xhttp.responseText);
 					document.getElementById("response").innerText=
-					"Response from server:"+xhttp.responseText;
+					"Response from server:"+ encodeInput(xhttp.responseText);
 				}
 			}
 
@@ -215,10 +229,17 @@ function drawHand(ctx, pos, length, width) {
 				$("#data").val("");
 			}
 			function printResult(result){
-			$("#response").html(result);
+			$("#response").html(encodeInput(result));
 			}
 			$.get("https://v2.jokeapi.dev/joke/Programming?type=single",function(result){
-				$("#response").html("Programming joke of the day: " +result.joke);
+				
+				if(result && result.joke){
+					var encodeJoke=encodeData(result.joke);
+					$("#response").html("Programming joke of the day: " +encodeJoke);
+				}
+				else{
+					$("#response").text("could not retreive a joke at this time");
+				}
 				});
 			
 			
@@ -227,10 +248,13 @@ function drawHand(ctx, pos, length, width) {
 	</script>
 	<script type="text/javascript">
 		async function guessAge(name){
-				const response= await fetch("https://api.agify.io/?name="+name+"&name="+name);
+				const response= await fetch("https://api.agify.io/?name="+name);
 				const result= await response.json();
+				if(result.age==null || result.age==0)
+					return $("#response").text("sorry the website threw a error");
+				$("#response").html("Hello "+name+" ,your age should be "+result.age)
 				console.log(result);
-				$("#response").html("Hello "+name+" ,your age should be "+result.age);
+				;
 			}
 	</script>
 
@@ -238,7 +262,7 @@ function drawHand(ctx, pos, length, width) {
 		<hr>
 		<b>Experiments with Javascript</b><br>
 		<i>Inlined JavaScript</i>
-		<div id="date" onclick="document.getElementById('date').innerHTML= Date()"> Click here to Show Date()</div>
+		<div id="date" onclick="document.getElementById('date').innerText= Date()"> Click here to Show Date()</div>
 	</div>
 </div>
 

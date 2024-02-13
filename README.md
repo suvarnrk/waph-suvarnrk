@@ -74,7 +74,9 @@ Included file `waph-suvarnrk.html`:
 </html>
 ```
 
-![A simple HTML Page](images/task1v1.png)
+![A simple HTML Page](images/simplehtml.png)
+
+![A simple HTML Page](images/html-forms1.png)
 
 ### Task 2. Simple JavaScript
 
@@ -92,7 +94,10 @@ This task has given a basic overview of JS syntax and different ways of integrat
         	Click to display time and date</div>
 	</div>
 ```
-![Console screen when clicked](images/task1v2b.png)
+
+![Display date/time when clicked](images/js-1.png)
+
+
 -JavaScript code in a <script> tag to display a digital clock.
 ```HTML
   <script>
@@ -100,6 +105,7 @@ This task has given a basic overview of JS syntax and different ways of integrat
 			document.getElementById('digital-clock').innerHTML=" The current Time is : "+ Date();
 		}
 		setInterval(displayTime,500);
+		
 </script>
 ```
  
@@ -125,7 +131,8 @@ This task has given a basic overview of JS syntax and different ways of integrat
 	<script type="text/javascript" src="email.js"></script>
 ```
 
-![Console screen when clicked](images/task1v2.png)
+![Display digital clock](images/js-2.png)
+![show email when clicked](images/js-3.png)
 
 -Displaying an Analog clock with an external Javascript code and code in HTML page.
 ```HTML
@@ -145,6 +152,7 @@ This task has given a basic overview of JS syntax and different ways of integrat
 				}
 </script>
 ```
+![Display analog clock](images/js-4.png)
 ## Part II - Ajax, CSS, jQuery, and Web API integration
 
 ### Task 1: Ajax
@@ -180,8 +188,8 @@ as it is a get call the input was sent as a path variable in the URL.
 	</script>
 ```
 The response for the Ajax call was analyezed in the inspect view. The request method was GET and the status code is 200OK and the input data was passed within the URL.
-![Making an Ajax get call with Tulasiram as input](images/task2v1.png)
-![Inpecting the response of Ajax call](images/task2v11.png)
+![Making an Ajax get call and inspecting respponse](images/ajax-1.png)
+
 
 ### Task 2: CSS
 
@@ -190,7 +198,7 @@ The response for the Ajax call was analyezed in the inspect view. The request me
 <body style="background-color: powderblue;">
 <h1 style="color: blue;">Web Application Programming and Hacking</h1>
 ```
-![modifed webpage after adding inline CSS](images/task2v2-0.png)
+![webpage after adding inline CSS](images/css-1.png)
 
 **b)** Internal CSS.
 ```HTML
@@ -232,7 +240,7 @@ The response for the Ajax call was analyezed in the inspect view. The request me
 		</div>
 	</div>
 ```
-![web page after adding internal CSS and external CSS](images/task2v2.png)
+![web page after adding internal CSS and external CSS](images/css.png)
 
 ### Task 3: JQuery
 
@@ -260,7 +268,7 @@ JQuery library has been added to the HTML code.
 			}
 	</script>
 ```
-![JQuery Ajax GET request to echo.php](images/task2v3-1.png)
+![JQuery Ajax GET request to echo.php](images/jquery-GET.png)
 
 **i.** Ajax POST request to echo.php , the response is analyzed in the inpect view. The call was POST and status code was 200OK.
 
@@ -284,7 +292,7 @@ JQuery library has been added to the HTML code.
 			}
 	</script>
 ```
-![JQuery Ajax POST request to echo.php](images/Task2v3-2.png)
+![JQuery Ajax POST request to echo.php](images/jquery-POST.png)
 
 ### Task 4: WEB API Integration.
 
@@ -303,8 +311,8 @@ Refreshing the webpage gives random joke each time.
 	</script>
 	<!-- HTML code -->
 ```
-![Random Joke displayed when the page is loaded](images/task2v4-1a.png)
-![Response of the webservice in inspect view](images/task2v4-1b.png)
+![Random Joke displayed when the page is loaded](images/jokeapi.png)
+![Response of the webservice in inspect view](images/jokeresp.png)
 
 **ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
 fetch method in Javascript is used to make HTTP request to the above webservice. as it is an asynchronous call the function is defined with the async keyword and the await is used to synchronize the response. The HTTP request made is GET and the status code is 200OK.
@@ -321,7 +329,7 @@ fetch method in Javascript is used to make HTTP request to the above webservice.
 ![Response from api.agify.io](images/task2v4-2.png)
 
 Below is the final webPage after completing all the tasks.
-![Lab 2 waph-nakkantm.html](images/finalLab2.png)
+![Lab 2 waph-nakkantm.html](images/final.png)
 
 Post this Labs/Lab2 folder was created to accomodate the project report and the changes were pushed. Pandoc tool was used to generate the project report from the README.md file
 
