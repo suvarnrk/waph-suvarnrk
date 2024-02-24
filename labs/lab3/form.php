@@ -12,7 +12,7 @@
 </head>
 <body>
   <h1>A Simple login form, WAPH</h1>
-  <h2>Student Name</h2>
+  <h2>Ruthvik Suvarnakanti</h2>
   <div id="digit-clock"></div>  
 <?php
   //some code here

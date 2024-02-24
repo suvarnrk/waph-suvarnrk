@@ -8,19 +8,32 @@
 		echo "<script>alert('Invalid username/password');window.location='form.php';</script>";
 		die();
 	}
+	function checklogin($username, $password) {
+		$account = array("admin","1234");
+		if (($username== $account[0]) and ($password == $account[1])) 
+		  return TRUE;
+		else 
+		  return FALSE;
+  	}
 	
 
   	function checklogin_mysql($username, $password) {
-		//$account = array("admin","1234");
-		$mysqli = new mysqli('localhost','admin1','password','waph');
+		
+		$mysqli = new mysqli('localhost','admin2','dummypass','waph');
 		if($mysqli->connect_errno){
 			printf("database connection error: %s\n", $mysqli->connect_error);
 			exit();
 		}
-		$sql = "SELECT * FROM users WHERE username='" . $username . "'";
-		$sql =$sql . " AND password='" .$password . "'";
-		echo "DEBUG>sql= $sql";
+		$sql = "SELECT * FROM users WHERE username='" . $username . "' ";
+		$sql= $sql . " AND password = md5('" . $password . "')";
+		$result= $mysqli->query($sql);
+		
+		if($result->num_rows==1){
 		return TRUE;
+		}
+		else{
+		return False;
+		}	
 	}	
 	
 
