@@ -1,4 +1,3 @@
-
 # WAPH-Web Application Programming and Hacking
 
 ## Instructor: Dr. Phu Phung
@@ -9,342 +8,169 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
+![Tulasiram Nakkanaboina](images/headshot.JPEG)
 
-## Lab 2 - Front End Web Development
 
-**Overview**: In this hands-on web development lab, we begin by constructing a simple HTML page, tossing in essential tags and forms to lay the groundwork. Then, we delve into JavaScript, tackling it from various angles: embedding it directly, using the script tag, linking to an external file, and even pulling code from a remote repository. To tackle up the look of our webpage, we play around with CSS – going for inline, internal, and external styles to make things visually appealing. Now, here comes jQuery, our trusty sidekick. It helps us pull off some slick AJAX calls, reaching out to the echo.php file that is needed to be reused from lab 1 for some asynchronous action. But we're not stopping there. We bring in two web services using jQuery and the fetch method – one for serving up random jokes and the other for taking a crack at guessing ages. And to put the finishing touches on our project, we enlist Pandoc to effortlessly transform our README.md into a published PDF file.
+## Lab 3 - Secure Web Application Development in PHP/MySQL
 
-[https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/README.md)
+**Overview**: The lab starts with setting up a basic database and making a simple login system using PHP and MySQL. It then dives into exploring common vulnerabilities like SQL Injection and Cross-Site Scripting (XSS), letting participants understand by actually exploiting them. Through hands-on practice, participants learn to spot and take advantage of weaknesses in the login system, getting a real feel for web application security issues. After uncovering these vulnerabilities, the focus turns to applying security measures like prepared statements and output sanitization to minimize risks. Overall, the lab gives a full learning experience, mixing theory with practical skills for building and protecting web applications effectively.
 
-\pagebreak
 
-## Part 1 : Basic HTML with forms, and JavaScript
-
-### Task 1. HTML
-
-As part of this task, we developed a basic HTML webpage named "waph-nakkantm.html." The webpage incorporates essential tags like <h1>, <h2>, <h3>, <a>, <img>, and <form>. These tags structure the content, create headings, hyperlinks, and images, making the webpage interactive and visually appealing.
-
-Included file `waph-suvarnrk.html`:
-```HTML
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>WAPH- Ruthvik Suvarnakanti</title>
-</head>
-<body>
-<div >
-	<div id="top">
-		<h1>Web Application Programming and Hacking</h1>
-		<h2>Front End Development Lab </h2>
-		<h3>Instructor : Dr Phu Phung</h3>
-	</div>
-	<div >
-		<div id="menubar">
-		<h3>Student : Ruthvik Suvarnakanti</h3>
-		<img src="images/headshot.jpg" alt="Ruthvik Headshot image" width="50">
-		</div>
-		<div id="main">
-			<p>A Simple HTML Page</p>
-			Using the <a href="https://www.w3schools.com/html">W3 Schools Template</a>
-			<hr>
-			<b>Interaction with forms</b>
-		<div>
-			<i> Form with an HTTP GET request</i>
-			<form action="/echo.php" method="GET">
-				Your Input: <input name="input">
-				<input type="submit" value="Submit">
-			</form>
-
-		</div>
-		<div>
-			<i> Form with an HTTP POST request</i>
-			<form action="/echo.php" method="GET" name="echo_post">
-				Your Input: <input name="input" onkeypress="console.log('You pressed a key')">
-				<input type="submit" value="Submit">
-				
-			</form>
-			</div>
-		</div>
-	</div>
-</div>		
-</body>
-</html>
-```
-
-![A simple HTML Page](images/simplehtml.png)
-
-![A simple HTML Page](images/html-forms1.png)
-
+Link to the repository:
+[https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab3/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab3/README.md)
 
 \pagebreak
 
-### Task 2. Simple JavaScript
+## Database Setup and Management
 
-In this task, we got a simple introduction to JavaScript syntax and explored various methods of adding JavaScript code into an HTML file. We played around with Inline JS, where we wrote code to show the current date and time when clicked. Additionally, we logged the click event on the console for a bit of behind-the-scenes action.
- 
-```HTML
- 	 <div>
-		<hr>
-		<b>Experiments with Javascript</b><br>
-		<i>Inlined JavaScript</i>
-		<div id="date" onclick="document.getElementById('date').innerHTML= Date()"> 		 Click here to Show Date()</div>
-	</div>
+### MySQL Installation
+
+The MySQL server is installed via the command `sudo apt-get install mysql-server -y`. Connection to the MySQL server is established using `sudo mysql -u root -p`, requiring authentication with the root user's password. This setup enables interaction with the MySQL server for database management and query execution.
+
+![Version Installed](images/1.png)
+
+### Create a New Database, Database User and Permission
+
+A new database named WAPH has been created. Within this database, a user named 'nakkantm' has been established, and full permissions have been granted to this user account for the WAPH database. This setup allows the suvarnrk user to perform all operations within the WAPH database, including creating, modifying, and deleting tables, as well as executing queries and managing data.
+
+![Database Created](images/2.png)
+
+The SQL commands used to acheive this are as follows:
+
+Included file `database-account.sql`
+
+```SQL
+create database waph;
+
+CREATE USER 'suvarnrk'@'localhost'
+IDENTIFIED BY 'ubuntu';
+
+GRANT ALL ON waph.* TO 'suvarnrk'@'localhost';
 ```
 
-![Display date/time when clicked](images/js-1.png)
+![Added user suvarnrk](images/3.png)
 
-![Display digital clock](images/js-2.png)
+\pagebreak
 
-![show email when clicked](images/js-3.png)
+### Create a new table `Users` and insert data into the table
+A new table named 'Users' has been established, and data has been inserted into this table using SQL commands. To enhance security, the md5() hash function has been employed to generate 128-bit hash values for the passwords before storing them in the database. This cryptographic technique ensures that the passwords are securely stored in a hashed format, providing an additional layer of protection against unauthorized access.
 
-![Display analog clock](images/js-4.png)
+Included file: `database-data.sql`
+``` SQL
 
--JavaScript code in a <script> tag to display a digital clock.
-```HTML
-  <script type="text/javascript">
-			function displayTime(){
-				document.getElementById('digit-clock').innerHTML ="Current time:" + new Date();
-			}
-			setInterval(displayTime,500);
-		</script>
+create table users(
+username varchar(50) PRIMARY KEY,
+password varchar(100) NOT NULL);
+
+INSERT INTO users(username,password) VALUES ('admin',md5('mypass'));
 ```
- 
--JS code in JS file and and code in HTML page to show or hide email when clicked.
-```JavaScript
-	var shown=false;
-function showhideEmail(){
-	if(shown){
-		document.getElementById('email').innerHTML="Show ny email";
-		shown =false;
-	}else{
-		var myemail="<a href='mailto:suvarnrk"+"@"+"mail.uc.edu'>suvarnrk"+"@"+"mail.uc.edu</a>";
-		document.getElementById('email').innerHTML=myemail;
-		shown=true;
-	}
+
+![Looged in user `suvarnrk` , Users table data](images/4.png)
+
+\pagebreak
+
+## B. A Simple (Insecure) Login System with PHP/MySQL
+The installation of the PHP MySQLi extension was completed by running the command `sudo apt-get install php-mysqli`. To ensure the changes take effect, the Apache web server was restarted using the command `sudo service apache2 restart`. This ensures that the PHP environment is correctly set up to utilize MySQLi functionality, facilitating smooth communication between PHP scripts and MySQL databases, thus enhancing the capabilities of web development projects.
+
+![admin logged into the web application with valid username and password](images/5.png)
+
+checklogin_mysql() function with SQLi vulenrability:
+```PHP
+function checklogin_mysql($username, $password) {
+    $mysqli = new mysqli('localhost', 'suvarnrk', 'ubuntu', 'waph');
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+    $sql = "SELECT * FROM users WHERE
+    username= '".$username."' AND password = MD5('".$password."')";
+    $result = $mysqli->query($sql);
+    if ($result->num_rows == 1) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
-	
 ```
+File included `Form.php`
 
 ```HTML
-	<div id="email" onclick="showOrHideEmail()">Show my email</div>
-	<script type="text/javascript" src="email.js"></script>
+<form action="index.php" method="POST" class="form login">
+Username: <input type="text" class="text_field" name="username" /> <br>
+Password: <input type="password" class="text_field" name="password" /> <br>
+<button class="button" type="submit"> Login </button>
 ```
+\pagebreak
 
+## Performing XSS and SQL Injection Attacks
 
+### SQL Injection Attack
+SQL injection is a common attack vector where attackers exploit vulnerabilities in the handling of user inputs to manipulate SQL queries. In your example, the SQL injection is achieved by appending `tulasiram' or 1=1; #` to the username field. This extra condition, `or 1=1`, is always true and causes the SQL query to return all results, effectively bypassing authentication and granting unauthorized access to the application.
 
--Displaying an Analog clock with an external Javascript code and code in HTML page.
-```HTML
-<canvas id="analog-clock" width="150" height="150" style="background-color:#999"></canvas>
-<script src="https://waph-uc.github.io/clock.js"></script>
-<script type=text/javascript>
-			const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let radius = canvas.height / 2;
-ctx.translate(radius, radius);
-radius = radius * 0.90
-setInterval(drawClock, 1000);
+This vulnerability arises from insecure concatenation of user inputs into SQL statements without proper validation or parameterization. When untrusted input, such as form fields or URL parameters, is directly concatenated into SQL queries, attackers can inject malicious SQL code. This injected code can alter the query's behavior, allowing attackers to execute arbitrary commands, retrieve sensitive data, or modify the database structure.
 
-function drawClock() {
-  drawFace(ctx, radius);
-  drawNumbers(ctx, radius);
-  drawTime(ctx, radius);
+To mitigate SQL injection, it's crucial to implement robust input validation and utilize parameterized queries. Input validation ensures that user inputs meet expected criteria, while parameterized queries separate SQL logic from user data, preventing injection attacks by treating user input as data rather than executable code. By adopting these security measures, web applications can defend against SQL injection and safeguard sensitive data.
+
+![SQL Injection to the web application](images/6.png)
+
+### Cross-site Scripting (XSS)
+In the web application, someone has injected a script to display an alert. This injected script, `admin' #<script>alert('Hacked by Ruthvik Suvarnakanti')</script>`, takes advantage of weaknesses in how the application handles user inputs, like the username field, to run harmful JavaScript code in the browser. 
+
+![Cross-site Scripting (XSS) attack](images/7.png)
+
+\pagebreak
+
+## d. Prepared Statement Implementation
+
+### Prepared Statement for SQL Injection Prevention
+
+Prepared statements offer a safeguard in database programming by keeping SQL commands separate from user input. They allow parameters to be handled independently, ensuring that user input is treated purely as data, not executable code. This approach automatically protects against SQL injection attacks by escaping special characters in the input. Essentially, prepared statements help to make database-driven applications more secure by treating user input with caution and preventing malicious code execution.
+
+![logging with credentials](images/8.png)
+
+`checklogin_mysql ` function after implementing the Prepared Statment.
+```PHP
+
+function checklogin_mysql($username, $password) {
+    $mysqli = new mysqli('localhost', 'suvarnrk', 'ubuntu', 'waph');
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+
+    $sql = "SELECT * FROM users
+     WHERE username= ? AND password = MD5(?)";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("ss",$username,$password);
+    $stmt->execute();
+    $result=$stmt->get_result();
+    if ($result->num_rows >= 1) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
-</script>
 ```
+![SQL injection fails to function once prepared statements are implemented](images/9.png)
 
 \pagebreak
 
-## Part II - Ajax, CSS, jQuery, and Web API integration
+### Security Analysis
 
-### Task 1: Ajax
+Prepared statements offer robust protection against SQL injection attacks by separating SQL commands from user input data. Utilizing parameterized queries, automatic escaping, and parameter binding, they ensure that user input is treated strictly as data, thwarting attempts to inject malicious SQL code into queries and manipulate the database. Furthermore, automatic handling of special characters in user input enhances security by eliminating SQL injection vulnerabilities.
 
-We wrote HTML code that captures user input and uses AJAX to make a GET call to echo.php. The received response is then showcased within a designated div. Since it's a GET call, the input was transmitted as a path variable in the URL.
+To address XSS vulnerabilities, the code snippet `<h2> Welcome <?php echo $_POST["username"]; ?> !</h2>` in index.php was modified to mitigate the risk. By employing `htmlspecialchars`, special characters are converted into their corresponding HTML entities. This ensures they are interpreted as plain text rather than HTML tags, effectively safeguarding against XSS attacks.
 
-```HTML
-	<div>
-		<i> Ajax Requests</i><br>
-		Your Input: 
-		<input name="data"
-		onkeypress="console.log('You have pressed a key ')" id="data">
-		<input type="button" class="button round" value="Ajax Echo" onclick="getEcho()">
-		<div id="response"></div>
-			<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-				<input class="button round" type="submit" value="Guess Age" onclick="guessAge($('#data').val())">
-				<div id="response"></div>
-	</script>
-```
-We examined the Ajax call response in the inspect view, observing that the request method was GET, the status code indicated a successful 200 OK, and the input data was transmitted within the URL.
+revised code :
+`<h2> Welcome <?php echo htmlspecialchars($_POST["username"]); ?> !</h2>`
 
-![Making an Ajax get call and inspecting respponse](images/ajax-1.png)
+![XSS attack ](images/10.png)
 
 \pagebreak
 
-### Task 2: CSS
 
-**a)** Inline CSS
-```HTML
-<body style="background-color: powderblue;">
-<h1 style="color: blue;">Web Application Programming and Hacking</h1>
-```
-![webpage after adding inline CSS](images/css-1.png)
+The code lacks validation for empty username or password fields before processing them in the checklogin_mysql() function. This oversight may result in unexpected behavior or errors if the user submits the form without entering any data.
 
-**b)** Internal CSS.
-```HTML
-	<style>
-		.button{
-			background-color:green;
-			border: none;
-			color: white;
-			padding: 5px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 12px;
-			margin: 4px 2px;
-			cursor: pointer;
-		}
-		.round{border-radius: 8px;}
-		#response{background-color: orange;}
-		}
-	<!-- HTML code -->
-	</style>
-	input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-				<input class="button round" type="submit" value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-				<input class="button round" type="submit" value="Guess Age" onclick="guessAge($('#data').val())">
-	<div id="response"></div>
-```
-**c)** External CSS from the remote repository provided in the lecture.[https://waph-uc.github.io/style1.css](https://waph-uc.github.io/style1.css).
+While the code handles failed database connections with $mysqli->connect_error, it overlooks other potential database errors that could occur during query execution. For instance, errors in SQL query syntax or database server issues are not properly handled, leading to silent failures without user feedback.
 
-```HTML
-	<link rel="stylesheet" type="text/css" href="https://waph-uc.github.io/style1.css">
-	<!-- HTML code -->
-	<div class="container wrapper">
-	<!-- HTML code -->
-		<div class="wrapper">
-	<!-- HTML code -->
-		</div>
-	</div>
-```
-![web page after adding internal CSS and external CSS](images/css.png)
+Storing passwords using MD5 hashing without salting poses security risks. MD5 is vulnerable to brute-force and rainbow table attacks due to its speed. It's advisable to use stronger hashing algorithms like bcrypt or Argon2 with unique salts for each password to enhance security.
 
-\pagebreak
-### Task 3: JQuery
-
-We included the jQuery library in the HTML code, incorporating two buttons one for jQuery Ajax GET and the other for jQuery Ajax POST. These buttons are designed to initiate GET and POST calls, respectively, to echo.php using jQuery. In the case of the Ajax GET request to echo.php, we inspected the response in the view, noting that it was a GET call with a status code of 200 OK.
-**i.** Ajax GET request to echo.php , the response is analyzed in the inpect view. The call was GET and status code was 200OK.
-
-```HTML
-	<!-- HTML code -->
-	<input class="button round" type="submit" value="JQuery Ajax Echo" onclick="getJqueryAjax()">
-	<!-- HTML code -->
-	<script>
-		function getJqueryAjax(){
-			var input=$("#data").val();
-				if(input.length==0)
-					return;
-			$.get("echo.php?data="+input,
-				      function(result){
-					      printResult(result);
-						});
-			$("#data").val("");
-			}
-		function printResult(result){
-			$("#response").html(result);
-			}
-	</script>
-```
-![JQuery Ajax GET request to echo.php](images/jquery-GET.png)
-
-**i.** Ajax POST request to echo.php , the response is analyzed in the inpect view. The call was POST and status code was 200OK.
-
-```HTML
-	<!-- HTML code -->
-	<input class="button round" type="submit"
-		value="JQuery Ajax Echo Post" onclick="getJqueryAjaxPost()">
-	<!-- HTML code -->
-	<script>
-		function getJqueryAjaxPost(){
-			var input=$("#data").val();
-			if(input.length==0)
-				return;
-			$.post("echo.php",{data:input},function(result){
-					printResult(result);
-					});
-			$("#data").val("");
-			}
-		function printResult(result){
-			$("#response").html(result);
-			}
-	</script>
-```
-![JQuery Ajax POST request to echo.php](images/jquery-POST.png)
-
-\pagebreak
-
-### Task 4: WEB API Integration.
-
-**i.** Using Ajax on [https://v2.jokeapi.dev/joke/Programming?type=single](https://v2.jokeapi.dev/joke/Programming?type=single)
-
-
-
-
-We wrote JavaScript code with jQuery Ajax to make a GET call to the specified web service. After receiving the response in JSON format, we converted it to a string and displayed it in the console. To extract the joke from this response, we used the result.joke property. This service generates a different random joke each time the webpage is refreshed, adding a touch of humor to the user experience.
-
-![Random Joke displayed when the page is loaded](images/jokeapi.png)
-
-The below picture represents image of randomly created joke when page is loaded.
-
-![Response of the webservice in inspect view](images/jokeresp.png)
-
-
-```HTML
-	<!-- HTML code -->
-	<script>
-	$.get("https://v2.jokeapi.dev/joke/Programming?type=single",function(result){
-				console.log("from joke API: "+ JSON.stringify(result));
-				$("#response").html("Programming joke of the day: " +result.joke);
-				});
-	</script>
-	<!-- HTML code -->
-```
-
-
-
-
-
-
-
-
-**ii.** Using the `fetch` API  on [https://api.agify.io/?name=input](https://api.agify.io/?name=input)
-
-
-In JavaScript, the fetch method is employed to initiate an HTTP request to the mentioned web service. Since this is an asynchronous call, the function is marked with the async keyword, and await is utilized to coordinate the response. The HTTP request executed is of the GET type, and a 200 OK status code confirms the success of the operation.
-
-```HTML
-	<script>
-	async function guessAge(name){
-				const response= await fetch("https://api.agify.io/?name="+name);
-				const result= await response.json();
-				$("#response").html("Hello "+name+" ,your age should be "+result.age);
-			}
-	</script>
-```
-
-The pictures of API calls are not responsive as there are too many request to API and gettting a status of 429 which is meant for request limit reached. I am attaching the pictures of the same here.
-
-![HTTP request to API](images/api-1.png)
-
-Below is the response of the API call.
-
-![Response from API](images/api-2.png)
-
-Below is the final webPage after completing all the tasks and following the lectures.
-
-![Ruthvik Suvarnakanti Final Page](images/final.png)
-
-Following the completion of the lab, a directory named "Lab2" was established to house both the project report and related files. Subsequently, these modifications were pushed to the repository. The project report was generated from the README.md file using the Pandoc tool.
-
-
+The code retrieves user records from the database where the username and password must match the input exactly, making usernames case-sensitive. This may lead to authentication issues if the stored username differs in case from the one provided by the user.
