@@ -8,7 +8,7 @@
 
 **Email**: suvarnrk@mail.uc.edu
 
-![Tulasiram Nakkanaboina](images/headshot.JPEG)
+![Ruthvik Suvarnakanti](images/headshot.JPEG)
 
 
 ## Lab 3 - Secure Web Application Development in PHP/MySQL
@@ -31,7 +31,7 @@ The MySQL server is installed via the command `sudo apt-get install mysql-server
 
 ### Create a New Database, Database User and Permission
 
-A new database named WAPH has been created. Within this database, a user named 'nakkantm' has been established, and full permissions have been granted to this user account for the WAPH database. This setup allows the suvarnrk user to perform all operations within the WAPH database, including creating, modifying, and deleting tables, as well as executing queries and managing data.
+A new database named WAPH has been created. Within this database, a user named 'suvarnrk' has been established, and full permissions have been granted to this user account for the WAPH database. This setup allows the suvarnrk user to perform all operations within the WAPH database, including creating, modifying, and deleting tables, as well as executing queries and managing data.
 
 ![Database Created](images/2.png)
 
@@ -104,7 +104,7 @@ Password: <input type="password" class="text_field" name="password" /> <br>
 ## Performing XSS and SQL Injection Attacks
 
 ### SQL Injection Attack
-SQL injection is a common attack vector where attackers exploit vulnerabilities in the handling of user inputs to manipulate SQL queries. In your example, the SQL injection is achieved by appending `tulasiram' or 1=1; #` to the username field. This extra condition, `or 1=1`, is always true and causes the SQL query to return all results, effectively bypassing authentication and granting unauthorized access to the application.
+SQL injection is a common attack vector where attackers exploit vulnerabilities in the handling of user inputs to manipulate SQL queries. In your example, the SQL injection is achieved by appending `Ruthvik' or 1=1; #` to the username field. This extra condition, `or 1=1`, is always true and causes the SQL query to return all results, effectively bypassing authentication and granting unauthorized access to the application.
 
 This vulnerability arises from insecure concatenation of user inputs into SQL statements without proper validation or parameterization. When untrusted input, such as form fields or URL parameters, is directly concatenated into SQL queries, attackers can inject malicious SQL code. This injected code can alter the query's behavior, allowing attackers to execute arbitrary commands, retrieve sensitive data, or modify the database structure.
 
