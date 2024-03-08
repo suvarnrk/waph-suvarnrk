@@ -14,6 +14,7 @@
 
 The tasks in this lab4 are about learning and implementing secure session management in PHP web applications. In Task 1, we'll set up and test `sessiontest.php`, and use Wireshark to understand how sessions are handled between clients and servers. We'll also explore the risks of session hijacking. Task 2 involves updating a login system to ensure it's secure and protected against session hijacking attacks. Finally, Task 3 focuses on making sessions and authentication more secure by setting up HTTPS for data protection and implementing measures to prevent session hijacking. These tasks aim to help us understand and implement robust security practices in web development.
 
+Link to repository: [https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab4/README.md](https://github.com/suvarnrk/waph-suvarnrk/blob/main/labs/lab4/README.md)
 
 ## Task 1: Understanding Session Management in a PHP Web Application
 
