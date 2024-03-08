@@ -4,85 +4,109 @@
 
 # WAPH-Lab 4: A Secure Login System with Session Authentication
 
+**Name**: Ruthvik Suvarnakanti
+
+**Email**: suvarnrk@mail.uc.edu
+
+![Ruthvik Suvarnakanti](images/headshot.JPEG){ width=150px height=150px }
+
 ## Overview
 
-This lab focuses on understanding, implementing, and securing session management in PHP web applications. Students will learn how to deploy session management, observe session handling processes, identify and mitigate session hijacking attacks, and apply secure session authentication measures.
+The tasks in this lab4 are about learning and implementing secure session management in PHP web applications. In Task 1, we'll set up and test `sessiontest.php`, and use Wireshark to understand how sessions are handled between clients and servers. We'll also explore the risks of session hijacking. Task 2 involves updating a login system to ensure it's secure and protected against session hijacking attacks. Finally, Task 3 focuses on making sessions and authentication more secure by setting up HTTPS for data protection and implementing measures to prevent session hijacking. These tasks aim to help us understand and implement robust security practices in web development.
 
-
-The hands-on exercises in this lab consist of multiple sub-tasks with grade distribution as follows. Please note that these sub-tasks and their Task have been covered in Lectures 9 (Task 1, moved from original Lab 3-Task 1), Lecture 15 (Task 2), and 16 (Task 3); asynchronous students should watch the lecture videos and slides. These hands-on steps with expected demonstration/screenshots in the report are combined in the attached slides for your convenience.
-
-## Expected Outcomes
-
-By completing this lab, students will gain practical experience in:
-- Implementing session management and authentication in PHP web applications.
-- Understanding session management processes by using tools like Wireshark to observe web traffic
-- Identifying vulnerabilities to session hijacking and implementing countermeasures, including configuring HTTPS to secure web applications.
 
 ## Task 1: Understanding Session Management in a PHP Web Application
 
-**Note: this task was introduced in Lecture 9 as Lab 3-Task 1**
+We have employed session management in our lab using sessionstest.php file where it represents the number of time user have visited the page. It start with the session_start() and eventually the session is incremented by every time the user visits the page.These sessions often vary with different browsers.
 
-### 1.a. Deploy and test `sessiontest.php` (2 pts)
 
-- **Sub-task**: Clone the course repository, revise and deploy `sessiontest.php` to your web server, and access it through different web browsers.
 
-- **Expected Demonstration**: A screenshot of the web page accessed from two different browsers showing different session values.
+### 1.a. Deploy and test `sessiontest.php` 
 
-### 1.b. Observe the Session-Handshaking using Wireshark (6 pts)
+To comply with the task requirements, we first clone the course repository to our local machine and locate the `sessiontest.php` file. After ensuring it meets the specified criteria and making any necessary revisions, we deploy it to our web server. We copy the file to the appropriate directory and access it through a web browser using the server's URL. We then test the functionality of `sessiontest.php` as instructed, ensuring session management works correctly. To access it through different web browsers, we simply open multiple browser instances and navigate to the same URL. This process allows us to observe any discrepancies in behavior across browsers and ensures the session management functionalities are robust and consistent.
 
-- **Sub-task**: Use Wireshark to capture the traffic while accessing `sessiontest.php`. Observe and analyze the first and subsequent HTTP requests and responses related to session handling. Ensure that you clear the cookies in the browser before performing this step.
+![Page testing using Sessions](images/0.png)
 
-- **Expected Demonstration**: Screenshots from Wireshark showing the first HTTP Request/Response and the subsequent Request/Response with a session cookie, and discuss your understanding of this session handshaking process. 
 
-### 1.c. Understanding Session Hijacking (2 pts)
+\pagebreak
 
-- **Sub-task**:  Follow the steps in the lecture to perform a session hijacking attack. 
+### 1.b. Observe the Session-Handshaking using Wireshark 
 
-- **Expected Demonstration**: Two screenshots of the attack and the outcome.
+To utilize Wireshark for capturing traffic while accessing `sessiontest.php`, start by clearing browser cookies to avoid interference from existing sessions. Then, initiate Wireshark and select the relevant network interface, applying a capture filter if necessary to focus on HTTP traffic. Begin capturing packets and access `sessiontest.php` through a web browser, performing required actions to trigger session handling. Analyze captured packets, focusing on HTTP requests and responses related to session handling.Firstly analyze packets of first HTTP request and then analyze the packets of the next HTTP request/response. Examine the initiation of sessions in the initial requests and subsequent interactions to observe session maintenance.  This process provides insights into the session handling mechanisms employed by `sessiontest.php`.
+
+![HTTP response of 1st Session](images/1.png)
+
+![HTTP response after 1st Session](images/2.png)
+
+\pagebreak
+
+### 1.c. Understanding Session Hijacking 
+
+To perform session hijacking, first, open the webpage in Chrome. Then, right-click and choose "Inspect" to open Developer Tools. Go to the Console tab and allow pasting if prompted. Next, type in the provided code, replacing `<value>` with the session ID you've obtained. After that, refresh the page to execute the hijacking. Take  screenshot  showing the code execution in the console and  displaying the consequences of the hijacked session, like accessing restricted content.
+
+![Hijacking a Session](images/3.png)
+
+\pagebreak
+
 
 ## Task 2: Insecure Session Authentication
 
-### 2.a. Revised Login System with Session Management (10 pts)
+### 2.a. Revised Login System with Session Management 
 
 **Attention: Lab 4 is based on Lab 3; you must have Lab 3 code completed first**
 
-- **Sub-task**: Copy the `index.php` file from the lab3 or lab4 folder and revise it to implement session management for a login system; create the file `logout.php`,  as guided in Lecture 15. Deploy and test the login functionality with session.
-
-- **Expected Demonstration**: Screenshots of authenticated users should be allowed to see the page, anytime after logging in successfully; an unauthenticated user (without username/password) must be alerted
+To improve the  login system in previous workings for managing authenticated sessions, changes are made mainly to `index.php`. Initially, it verifies whether the user provides a username and password, confirming them against the MySQL database. If successful, the session is marked as authenticated, and the username is stored. In case of failure, an alert is triggered, the session is cleared, and the user is redirected to the login form. Additionally, it checks if the login session exists; if not, it alerts the user and redirects them to the login form. Once authenticated, a personalized welcome message is shown using the username from the session, alongside a logout link leading to `logout.php`. In `logout.php`, all session data is wiped before sending the user back to the login form. These updates ensure more secure session management and user authentication, enhancing both functionality and security aspects of the system.
 
 
-### 2.b. Session Hijacking Attacks (5 pts)
+![Login with Valid Credentials](images/4.png)
 
-- **Sub-task**: Simulate a session hijacking attack by manually copying the session ID from one browser and pasting it into another browser.
+![Alert message for non authenticated user](images/5.png)
 
-- **Expected Demonstration**: Screenshots showing access to a session-protected page by hijacking the session ID.
+![Logout page on clicking Logout](images/6.png)
+
+\pagebreak
+
+
+### 2.b. Session Hijacking Attacks 
+
+In this task, we will be logged in into Firefox,  tries to exploit a stolen session ID to access the system without proper credentials. Initially unable to log in due to lacking the required username and password, the attacker sets the stolen session ID as a cookie and revisits the `index.php` page, bypassing the need for authentication. This illustrates how vulnerable the system is to session hijacking attacks, underscoring the necessity for implementing strong security measures to prevent such breaches.
+
+![copying the SessionID](images/7.png)
+
+![pasting the Session Id to skip authentication](images/8.png)
+
+\pagebreak
+
 
 ## Task 3: Securing Session and Session Authentication
 
-### 3.a. Data Protection and HTTPS Setup (10 pts)
+### 3.a. Data Protection and HTTPS Setup 
 
-- **Sub-task**: Generate SSL certificates and configure your web server to use HTTPS. Access your web application over HTTPS.
-- **Expected Demonstration**: Screenshots of the SSL certificate and one of the PHP pages on HTTPS.
+To set up HTTPS on Apache2,
+First, generating a public and private key pair by creating a new folder named `sslkey` in our repository and using the `openssl` command to create the key pair. Next, configure HTTPS in Apache2 by copying the generated `waph.crt` and `waph.key` files to the appropriate directories and editing the `default-ssl.conf` file to specify the SSL certificate and key file paths. Then, enable the Apache SSL module and the edited SSL configuration, and restart the Apache web server. Once configured, access the secure site using the specified URL. You may encounter a security warning about an unknown certificate, but you can proceed by adding an exception and verifying the certificate details. Optionally, we can set up a hostname on Ubuntu by adding our sitename to the hosts file.
 
-### 3.b. Securing Session Against Session Hijacking Attacks - setting HttpOnly and Secure flags for cookies  (7.5 pts)
-- **Sub-task**: Implement measures to secure sessions, including setting the HttpOnly and Secure flags for session cookies.
+![Certificate generated for WAPH-suvarnrk](images/9.png)
 
-- **Expected Demonstration**: Screenshot of the browser showing the HttpOnly and Secure flags set for cookies.
+![Login Form Using HTTPS](images/10.png)
+
+
+\pagebreak
+
+### 3.b. Securing Session Against Session Hijacking Attacks - setting HttpOnly and Secure flags for cookies  
+
+To prevent session hijacking, it's important to implement security measures like adjusting session cookie settings. This includes making sure that session cookies can only be accessed through HTTP and limiting their transmission to HTTPS connections. Additionally, it's beneficial to set a time limit on sessions to reduce the risk of attacks. These settings should be configured before starting a session within PHP scripts, such as `index.php`. Testing the setup involves clearing any existing session cookies and verifying that trying to access the page without valid ones triggers alerts, indicating that the user is not logged in. This helps ensure effective protection against session hijacking and improves overall web application security.
+
+![Setting Secure and HTTP only flags True](images/11.png)
+
+\pagebreak
+
 
 ### 3.c. Securing Session Against Session Hijacking Attacks - Defense In-Depth (7.5 pts).
 
-- **Sub-task**: Revise the `index.php` to store a new session variable with browser information (after the authentication process is validated); check the information from the browser and the session (after all other checks), if they are different, it means that the session is hijacked, thus alert and redirect to the login page. 
- 
-- **Expected Demonstration**: A screenshot showing a session hijacking is detected
+To make `index.php` more secure we make changes.After confirming authentication, we'll store browser information as a new session variable. Later on, we'll compare this stored browser data with the current browser details. If they don't match, it suggests a possible session hijacking attempt.
+These adjustments help enhance protection against unauthorized access, effectively detecting and preventing session hijacking attacks.
 
-## Report 
+![Alerting using Session Hijacking Mesaage](images/12.png)
 
-You can write a report using Markdown format or any Word processor, i.e., you do not have to use Markdown. **Please note that demo screenshots must include your virtual machine name or your name with proper captions and be visible, i.e., in high resolution, not too blurry or with much blank space, for grading**. 
 
-Your report should follow the template provided in Lecture 2 ([https://github.com/phungph-uc/waph/blob/main/README-template.md](https://github.com/phungph-uc/waph/blob/main/README-template.md)) which should include the course name and instructor, your name and email together with your headshot (150x150 pixels), and sub-sections of the assignment's overview with the URL to the lab's folder in your repository, and each task and sub-task. **To get full grades for each sub-task, briefly describe how you completed it and your understanding of the outcome, and the corresponding code is in your repository.**
 
-## Submission
-
-Your report must be exported in  PDF with contents and screenshots correctly rendered in proper order. 
-
-The PDF file should be named `your-username-waph-lab4.pdf`, e.g., `phungph-waph-lab4.pdf`, and uploaded to Canvas to submit by the deadline. 
