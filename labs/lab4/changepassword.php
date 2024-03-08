@@ -2,7 +2,7 @@
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 	if(isset($username) and isset($password)){
-		echo "Debug> changepassword.php got username=$username;got password=$password";
+		echo "Debug> changepassword.php-> Your password is successfully changed got username=$username;got password=$password";
 		/*if(addnewuser($username, $password)){
 			echo "Registration Succeed";
  		}else{
