@@ -1,5 +1,5 @@
 <?php
-session_set_cookie_params(15*60, "/", "waph-team26.minifacebook.com", TRUE, TRUE);
+session_set_cookie_params(15*60, "/", "https://192.168.64.6/loginform.php", TRUE, TRUE);
 session_start();
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== TRUE) {

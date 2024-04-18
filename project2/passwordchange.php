@@ -1,13 +1,13 @@
 
 <?php
-//require "sessionauth.php";
+require "sessionauth.php";
 require "database.php";
 
- //$token = $_POST['csrf-token'];
- //if (!isset($token) || $token !== $_SESSION['csrf-token']) {
- //    echo "CSRF Attack is detected";
-  // die();
-//}
+ $token = $_POST['csrf-token'];
+ if (!isset($token) || $token !== $_SESSION['csrf-token']) {
+    echo "CSRF Attack is detected";
+  die();
+}
 
 $username = $_POST['username'];
 $newpassword = $_POST['newpassword'];
